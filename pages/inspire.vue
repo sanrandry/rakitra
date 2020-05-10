@@ -1,15 +1,17 @@
 <template>
-  <v-layout>
-    <v-flex class="text-center">
-      <v-btn color="success" @click="sheet = true">open sheat</v-btn>
-      <v-bottom-sheet v-model="sheet">
-        <v-sheet class="text-center" height="250px">
-          <v-btn color="success" @click="sheet = false">close</v-btn>
-          <login />
-        </v-sheet>
-      </v-bottom-sheet>
-    </v-flex>
-  </v-layout>
+  <div>
+    <v-layout>
+      <v-flex class="text-center">
+        <v-btn color="success" @click="sheet = true">open sheat</v-btn>
+        <v-dialog fullscreen v-model="sheet">
+          <div>
+            <v-btn color="success" @click="sheet = false">close</v-btn>
+            <login />
+          </div>
+        </v-dialog>
+      </v-flex>
+    </v-layout>
+  </div>
 </template>
 
 <script>
@@ -20,6 +22,7 @@ export default {
   },
   data() {
     return {
+      panel: [0, 1],
       sheet: false
     };
   }

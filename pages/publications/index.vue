@@ -31,7 +31,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  head: function() {
+    return {
+      title: "test"
+    };
+  }
+};
 </script>
 
 <style>

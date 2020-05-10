@@ -35,6 +35,9 @@
 
 <script>
 export default {
+  beforeMount() {
+    console.log("dfsd");
+  },
   data() {
     return {
       clipped: false,

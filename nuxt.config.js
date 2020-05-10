@@ -1,7 +1,7 @@
 import colors from "vuetify/es5/util/colors";
 
 export default {
-  mode: "universal",
+  mode: "spa",
   /*
    ** Headers of the page
    */
@@ -23,6 +23,11 @@ export default {
    ** Customize the progress-bar color
    */
   loading: { color: "#fff" },
+  loadingIndicator: {
+    name: "circle",
+    color: "#3B8070",
+    background: "white"
+  },
   /*
    ** Global CSS
    */
