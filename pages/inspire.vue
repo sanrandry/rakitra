@@ -1,30 +1,41 @@
 <template>
-  <div>
-    <v-layout>
-      <v-flex class="text-center">
-        <v-btn color="success" @click="sheet = true">open sheat</v-btn>
-        <v-dialog fullscreen v-model="sheet">
-          <div>
-            <v-btn color="success" @click="sheet = false">close</v-btn>
-            <login />
-          </div>
-        </v-dialog>
-      </v-flex>
-    </v-layout>
-  </div>
+  <v-layout row wrap>
+    <v-container grid-list-xs>
+      <v-row justify="center">
+        <v-col cols="3">
+          <auth-card />
+        </v-col>
+      </v-row>
+    </v-container>
+    <!-- <v-container grid-list-xs>{{categories}}</v-container> -->
+  </v-layout>
 </template>
 
 <script>
-import login from "@/components/common/auth/login";
+import authCard from "@/components/common/auth/authCard";
+import postForm from "@/components/post/postForm";
 export default {
+  async asyncData({ $axios }) {
+    let categories = [];
+    try {
+      categories = await $axios.$get("/categories");
+    } catch (error) {
+      console.log(error);
+    }
+    return {
+      categories: categories
+    };
+  },
   components: {
-    login: login
+    "auth-card": authCard,
+    "post-form": postForm
   },
   data() {
     return {
       panel: [0, 1],
       sheet: false
     };
-  }
+  },
+  mounted() {}
 };
 </script>

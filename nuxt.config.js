@@ -1,7 +1,7 @@
 import colors from "vuetify/es5/util/colors";
 
 export default {
-  mode: "spa",
+  mode: "universal",
   /*
    ** Headers of the page
    */
@@ -48,13 +48,44 @@ export default {
     "@nuxtjs/axios",
     "@nuxtjs/pwa",
     // Doc: https://github.com/nuxt-community/dotenv-module
-    "@nuxtjs/dotenv"
+    "@nuxtjs/dotenv",
+    // Doc: https://auth.nuxtjs.org/
+    "@nuxtjs/auth"
   ],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    baseURL: "http://localhost:3001/api"
+  },
+
+  /**
+   * Auth module configuration
+   * See https://auth.nuxtjs.org/
+   */
+  auth: {
+    // Options
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: "/accounts/login",
+            method: "post",
+            propertyName: "id"
+          },
+          logout: { url: "/accounts/logout", method: "post" },
+          user: false
+        },
+        // tokenRequired: true,
+        tokenType: "",
+        // globalToken: true,
+        autoFetchUser: false
+      }
+    },
+    // plugin extension
+    plugins: [{ src: "~/plugins/auth.js", mode: "client" }]
+  },
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
