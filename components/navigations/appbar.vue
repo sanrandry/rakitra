@@ -47,14 +47,14 @@
       >Login</v-btn>
       <v-menu v-if="$auth.loggedIn" offset-y>
         <template v-slot:activator="{on}">
-          <v-btn fab text small v-on="on">
-            <v-avatar color="indigo" size="32">
-              <span class="white--text headline">C</span>
-            </v-avatar>
-          </v-btn>
+          <!-- <v-btn fab text small v-on="on"> -->
+          <v-avatar v-on="on" style="cursor: pointer" color="deep-purple darken-2" size="32">
+            <span class="white--text headline">s</span>
+          </v-avatar>
+          <!-- </v-btn> -->
         </template>
         <v-list>
-          <v-list-item @click="logout()">
+          <v-list-item nuxt to="/profil">
             <v-list-item-content>
               <v-list-item-title>Profil</v-list-item-title>
             </v-list-item-content>
