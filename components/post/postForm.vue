@@ -94,6 +94,7 @@ export default {
           post
         );
         this.submit_btn_loading = false;
+        this.$router.push({ path: "/profil" });
       } catch (error) {
         console.log(error.response);
         this.submit_btn_loading = false;

@@ -3,16 +3,48 @@
     <v-row>
       <v-col>
         <nuxt-link to="/profil/editor">editor</nuxt-link>
+        {{user_posts}}
       </v-col>
     </v-row>
     <v-row>
-      <v-col></v-col>
+      <v-col cols="12" md="3" v-for="item in user_posts" :key="item">
+        <post-card></post-card>
+      </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
-export default {};
+import postCard from "@/components/post/postCard";
+export default {
+  data() {
+    return {
+      user_posts: []
+    };
+  },
+  components: {
+    "post-card": postCard
+  },
+  mounted() {
+    // fetch curent user post
+    this.fetch_user_post();
+  },
+  methods: {
+    async fetch_user_post() {
+      try {
+        let filter = { fields: { id: true } };
+        this.user_posts = await this.$axios.$get(
+          "accounts/" +
+            localStorage.getItem("uid") +
+            "/posts?filter=" +
+            encodeURI(JSON.stringify(filter))
+        );
+      } catch (error) {
+        console.log(error.response);
+      }
+    }
+  }
+};
 </script>
 
 <style>
