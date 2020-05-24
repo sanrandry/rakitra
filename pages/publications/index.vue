@@ -1,8 +1,8 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="12" md="3" v-for="item in 15" :key="item">
-        <post-card></post-card>
+      <v-col cols="12" md="3" v-for="item in posts" :key="item.id">
+        <post-card :post_id="item.id"></post-card>
       </v-col>
     </v-row>
   </v-container>
@@ -16,8 +16,28 @@ export default {
       title: "test"
     };
   },
+  data: () => {
+    return {
+      posts: []
+    };
+  },
   components: {
     "post-card": postCard
+  },
+  mounted() {
+    this.fetch_post();
+  },
+  methods: {
+    async fetch_post() {
+      try {
+        const filter = { fields: { id: true } };
+        this.posts = await this.$axios.$get(
+          "/posts?filter=" + encodeURI(JSON.stringify(filter))
+        );
+      } catch (error) {
+        console.log(error.response);
+      }
+    }
   }
 };
 </script>

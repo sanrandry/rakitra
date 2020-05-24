@@ -1,44 +1,95 @@
 <template>
-  <v-lazy transition="fade-transition">
-    <v-card flat hover class="mx-2 my-2">
-      <v-list-item>
-        <v-list-item-avatar color="grey"></v-list-item-avatar>
-        <v-list-item-content>
-          <v-list-item-title class>san randry sitraka</v-list-item-title>
-          <v-list-item-subtitle>1 h</v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-      <v-img
-        class="white--text align-end"
-        height="200px"
-        :lazy-src="require('@/assets/images/logo/rakitra_logo.png')"
-        src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-      >
-        <template v-slot:placeholder>
-          <v-row class="fill-height ma-0" align="center" justify="center">
-            <v-progress-circular indeterminate color="red lighten-5"></v-progress-circular>
-          </v-row>
-        </template>
-      </v-img>
-      <v-card-title>Top 10 Australian beaches</v-card-title>
+  <v-lazy group transition="fade-transition">
+    <div v-if="!post">loading...</div>
+    <v-hover v-if="post">
+      <template v-slot:default="{hover}">
+        <v-card @click="read()" flat class="mx-2 my-2">
+          <v-list-item>
+            <v-list-item-avatar color="grey"></v-list-item-avatar>
+            <v-list-item-content>
+              <v-list-item-title class>{{post.account.name}}</v-list-item-title>
+              <v-list-item-subtitle>1 h</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+          <v-img
+            class="white--text align-end"
+            height="200px"
+            :lazy-src="require('@/assets/images/logo/rakitra_logo.png')"
+            src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+          >
+            <template v-slot:placeholder>
+              <v-row class="fill-height ma-0" align="center" justify="center">
+                <v-progress-circular indeterminate color="red lighten-5"></v-progress-circular>
+              </v-row>
+            </template>
+          </v-img>
+          <v-card-title>{{post.title}}</v-card-title>
 
-      <v-card-text class="text--primary">
-        <div>Whitehaven Beach</div>
+          <v-card-text class="text--primary">
+            <div>{{post.excerpt}}</div>
+          </v-card-text>
 
-        <div>Whitsunday Island, Whitsunday Islands</div>
-      </v-card-text>
+          <!-- <v-card-actions>
+            <v-btn color="orange" text>Share</v-btn>
 
-      <v-card-actions>
-        <v-btn color="orange" text>Share</v-btn>
-
-        <v-btn color="orange" text>Explore</v-btn>
-      </v-card-actions>
-    </v-card>
+            <v-btn color="orange" text>Explore</v-btn>
+          </v-card-actions>-->
+          <v-fade-transition>
+            <v-overlay @click="read()" v-if="hover" absolute color="white">
+              <v-btn color="success">Lire</v-btn>
+            </v-overlay>
+          </v-fade-transition>
+        </v-card>
+      </template>
+    </v-hover>
   </v-lazy>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    post_id: {
+      type: String,
+      required: true
+    }
+  },
+  data: () => {
+    return {
+      post: null
+    };
+  },
+  mounted() {
+    if (!this.post_id) {
+      return;
+    }
+    this.fetch_post();
+  },
+  methods: {
+    async fetch_post() {
+      try {
+        const filter = {
+          include: [
+            {
+              relation: "account"
+            }
+          ]
+        };
+        this.post = await this.$axios.$get(
+          "/posts/" +
+            this.post_id +
+            "?filter=" +
+            encodeURI(JSON.stringify(filter))
+        );
+        console.log(this.post);
+      } catch (error) {
+        console.log(error.respose);
+      }
+    },
+    read() {
+      alert();
+    }
+  }
+};
 </script>
 
 <style>

@@ -7,8 +7,8 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12" md="3" v-for="item in user_posts" :key="item">
-        <post-card></post-card>
+      <v-col cols="12" md="3" v-for="item in user_posts" :key="item.id">
+        <post-card :post_id="item.id"></post-card>
       </v-col>
     </v-row>
   </v-container>

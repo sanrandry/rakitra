@@ -1,7 +1,5 @@
 <template>
-  <v-layout column justify-center align-center>
-    <banner />
-  </v-layout>
+  <banner />
 </template>
 
 <script>

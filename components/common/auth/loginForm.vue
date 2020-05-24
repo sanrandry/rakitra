@@ -1,41 +1,39 @@
 <template>
-  <v-card>
-    <v-card-text>
-      <form @submit.prevent="login()">
-        <v-row no-gutters>
-          <v-col>
-            <v-text-field name="email" v-model="login_data.email" label="Email"></v-text-field>
-          </v-col>
-        </v-row>
-        <v-row no-gutters>
-          <v-col>
-            <v-text-field
-              name="password"
-              :type="login_data.password_show ? 'text' : 'password'"
-              :append-icon="login_data.password_show ? 'mdi-eye-off' : 'mdi-eye'"
-              v-model="login_data.password"
-              @click:append="login_data.password_show = !login_data.password_show"
-              label="Mot de passe"
-            ></v-text-field>
-          </v-col>
-        </v-row>
-        <v-row no-gutters></v-row>
-        <v-row>
-          <v-col no-gutters class="d-flex flex-row-reverse">
-            <v-btn
-              type="submit"
-              @click="login()"
-              :loading="login_data.button_loading"
-              depressed
-              color="success"
-              class="text-capitalize"
-            >Se connecter</v-btn>
-          </v-col>
-        </v-row>
-      </form>
-    </v-card-text>
-    <v-card-text>{{login_data}}</v-card-text>
-  </v-card>
+  <v-card-text>
+    <form @submit.prevent="login()">
+      <v-row no-gutters>
+        <v-col>
+          <v-text-field name="email" v-model="login_data.email" label="Email"></v-text-field>
+        </v-col>
+      </v-row>
+      <v-row no-gutters>
+        <v-col>
+          <v-text-field
+            name="password"
+            :type="login_data.password_show ? 'text' : 'password'"
+            :append-icon="login_data.password_show ? 'mdi-eye-off' : 'mdi-eye'"
+            v-model="login_data.password"
+            @click:append="login_data.password_show = !login_data.password_show"
+            label="Mot de passe"
+          ></v-text-field>
+        </v-col>
+      </v-row>
+      <v-row no-gutters></v-row>
+      <v-row>
+        <v-col no-gutters class="d-flex flex-row-reverse">
+          <v-btn
+            type="submit"
+            @click="login()"
+            :loading="login_data.button_loading"
+            depressed
+            color="success"
+            class="text-capitalize"
+          >Se connecter</v-btn>
+        </v-col>
+      </v-row>
+    </form>
+    <!-- <v-card-text>{{login_data}}</v-card-text> -->
+  </v-card-text>
 </template>
 
 <script>

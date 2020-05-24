@@ -92,6 +92,9 @@ export default {
    */
   vuetify: {
     customVariables: ["~/assets/variables.scss"],
+    // icons: {
+    //   iconfont: 'mdi', // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4' || 'faSvg'
+    // },
     theme: {
       dark: false,
       themes: {
@@ -114,6 +117,6 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
+    extend(config, ctx) { }
   }
 };
