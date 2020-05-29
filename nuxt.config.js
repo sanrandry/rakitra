@@ -35,7 +35,10 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [{ src: "plugins/owl.js", mode: "client" }],
+  plugins: [
+    { src: "plugins/owl.js", mode: "client" },
+    { src: "plugins/profileAvatar.js" }
+  ],
   /*
    ** Nuxt.js dev-modules
    */

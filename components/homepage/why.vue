@@ -10,9 +10,7 @@
             src="https://picsum.photos/1080"
           >
             <template v-slot:placeholder>
-              <v-row class="fill-height ma-0" align="center" justify="center">
-                <v-progress-circular indeterminate color="red lighten-5"></v-progress-circular>
-              </v-row>
+              <v-img-lazy-loading></v-img-lazy-loading>
             </template>
           </v-img>
         </v-col>
@@ -28,7 +26,12 @@
 </template>
 
 <script>
-export default {};
+import vImgLazyLoading from "@/components/common/vImgLazyLoading";
+export default {
+  components: {
+    "v-img-lazy-loading": vImgLazyLoading
+  }
+};
 </script>
 
 <style>

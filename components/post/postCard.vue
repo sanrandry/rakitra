@@ -3,7 +3,7 @@
     <div v-if="!post">loading...</div>
     <v-hover v-if="post">
       <template v-slot:default="{hover}">
-        <v-card @click="read()" flat class="mx-2 my-2">
+        <v-card @click="read(post.id)" flat class="mx-2 my-2">
           <v-list-item>
             <v-list-item-avatar color="grey"></v-list-item-avatar>
             <v-list-item-content>
@@ -15,7 +15,7 @@
             class="white--text align-end"
             height="200px"
             :lazy-src="require('@/assets/images/logo/rakitra_logo.png')"
-            src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+            :src="post.images ? post.images.data : require('@/assets/images/logo/rakitra_logo.png')"
           >
             <template v-slot:placeholder>
               <v-row class="fill-height ma-0" align="center" justify="center">
@@ -35,7 +35,7 @@
             <v-btn color="orange" text>Explore</v-btn>
           </v-card-actions>-->
           <v-fade-transition>
-            <v-overlay @click="read()" v-if="hover" absolute color="white">
+            <v-overlay @click="read(post.id)" v-if="hover" absolute color="white">
               <v-btn color="success">Lire</v-btn>
             </v-overlay>
           </v-fade-transition>
@@ -71,6 +71,9 @@ export default {
           include: [
             {
               relation: "account"
+            },
+            {
+              relation: "images"
             }
           ]
         };
@@ -85,8 +88,8 @@ export default {
         console.log(error.respose);
       }
     },
-    read() {
-      alert();
+    read(post_id) {
+      this.$router.push({ name: "publications-id", params: { id: post_id } });
     }
   }
 };

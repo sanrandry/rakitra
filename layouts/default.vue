@@ -4,17 +4,18 @@
     <v-content>
       <nuxt />
     </v-content>
-    <v-footer :fixed="true" absolute app>
-      <span>&copy; {{ new Date().getFullYear() }}</span>
-    </v-footer>
+    <v-divider></v-divider>
+    <appfooter />
   </v-app>
 </template>
 
 <script>
 import appbar from "@/components/navigations/appbar";
+import appfooter from "@/components/navigations/appfooter";
 export default {
   components: {
-    appbar: appbar
+    appbar: appbar,
+    appfooter: appfooter
   }
 };
 </script>

@@ -49,7 +49,7 @@
         <template v-slot:activator="{on}">
           <!-- <v-btn fab text small v-on="on"> -->
           <v-avatar v-on="on" style="cursor: pointer" color="deep-purple darken-2" size="32">
-            <span class="white--text headline">{{$auth.user.name}}</span>
+            <span class="white--text subtitle-2">{{$auth.user.name | first_letter}}</span>
           </v-avatar>
           <!-- </v-btn> -->
         </template>
