@@ -77,7 +77,7 @@
           </v-row>
           <v-row>
             <v-col cols="12" class="d-flex justify-end">
-              <v-btn :loading="submit_btn_loading" color="success" cal @click="publish()">Publier</v-btn>
+              <v-btn :loading="submit_btn_loading" color="success" cal @click="submit()">Publier</v-btn>
               <v-btn text>Annuler</v-btn>
             </v-col>
           </v-row>
@@ -106,6 +106,10 @@ export default {
   },
   mounted() {
     this.fetch_categories();
+    // verify if we have a post id
+    if (this.$route.query.id) {
+      this.fetch_post(this.$route.query.id);
+    }
   },
   methods: {
     async fetch_categories() {
@@ -113,6 +117,38 @@ export default {
         this.categories = await this.$axios.$get("/categories");
       } catch (error) {
         console.log(error.response);
+      }
+    },
+    async fetch_post(id) {
+      try {
+        let post = await this.$axios.$get(
+          "accounts/" + localStorage.getItem("uid") + "/posts/" + id
+        );
+        console.log(post);
+        if (post) {
+          // initialize the current post
+          this.post_data.title = post.title;
+          this.post_data.excerpt = post.excerpt;
+          this.post_data.content = post.content;
+          // get post cover image
+          try {
+            let cover_image = await this.$axios.$get(
+              "/posts/" + post.id + "/images"
+            );
+            if (cover_image) {
+              this.post_data.cover_image = cover_image.data;
+            }
+          } catch (error) {}
+          // get post categories
+          let categories = await this.$axios.$get(
+            "/posts/" + post.id + "/categories"
+          );
+          if (categories && categories.length > 0) {
+            this.post_data.category = categories[0].id;
+          }
+        }
+      } catch (error) {
+        console.log(error);
       }
     },
     get_image(file) {
@@ -125,6 +161,13 @@ export default {
         this.post_data.cover_image = reader.result;
       };
       reader.readAsDataURL(file);
+    },
+    submit() {
+      if (this.$route.query.id) {
+        this.update();
+      } else {
+        this.publish();
+      }
     },
     async publish() {
       this.submit_btn_loading = true;
@@ -168,6 +211,90 @@ export default {
       } catch (error) {
         console.log(error);
         this.submit_btn_loading = false;
+      }
+    },
+    async update() {
+      this.submit_btn_loading = true;
+      try {
+        // post varible
+        let post = {
+          title: this.post_data.title,
+          excerpt: this.post_data.excerpt,
+          content: this.post_data.content
+        };
+        // update the post
+        const updated_post = await this.$axios.$put(
+          "/accounts/" +
+            localStorage.getItem("uid") +
+            "/posts/" +
+            this.$route.query.id,
+          post
+        );
+        // update post image
+        if (this.post_data.cover_image) {
+          try {
+            await this.$axios.$put("posts/" + updated_post.id + "/images/", {
+              data: this.post_data.cover_image
+            });
+          } catch (error) {
+            // if the related image does not exist
+            if ((error.response.data.error.statusCode = 500)) {
+              // post the image
+              await this.$axios.$post("posts/" + updated_post.id + "/images/", {
+                data: this.post_data.cover_image
+              });
+            }
+          }
+        }
+        // update post catetegory
+        // check if the current post is already has this category
+        const old_post_category = await this.$axios.$get(
+          "posts/" + updated_post.id + "/categories"
+        );
+        // if there is an old category
+        if (old_post_category && old_post_category.length > 0) {
+          // verify if we have a category on the post data
+          if (this.post_data.category) {
+            // delete the old relation
+            await this.$axios.$delete(
+              "/posts/" +
+                updated_post.id +
+                "/categories/rel/" +
+                old_post_category[0].id
+            );
+            // create a new relation
+            await this.$axios.$put(
+              "/posts/" +
+                updated_post.id +
+                "/categories/rel/" +
+                this.post_data.category
+            );
+          } else {
+            // delete the post related category
+            await this.$axios.$delete(
+              "/posts/" +
+                updated_post.id +
+                "/categories/rel/" +
+                old_post_category[0].id
+            );
+          }
+        } else {
+          // no old category
+          if (this.post_data.category) {
+            // add relation to category
+            await this.$axios.$put(
+              "/posts/" +
+                updated_post.id +
+                "/categories/rel/" +
+                this.post_data.category
+            );
+          }
+        }
+        this.submit_btn_loading = false;
+        this.$router.push({ name: "profil" });
+      } catch (error) {
+        this.submit_btn_loading = false;
+        console.log(error);
       }
     }
   }

@@ -74,6 +74,9 @@ export default {
             },
             {
               relation: "images"
+            },
+            {
+              relation: "categories"
             }
           ]
         };
