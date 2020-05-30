@@ -6,6 +6,7 @@
           <auth-card />
         </v-col>
       </v-row>
+      <div id="summernote">Hello Summernote</div>
     </v-container>
     <!-- <v-container grid-list-xs>{{categories}}</v-container> -->
   </v-layout>
@@ -36,6 +37,14 @@ export default {
       sheet: false
     };
   },
-  mounted() {}
+  mounted() {
+    $(document).ready(function() {
+      $("#summernote").summernote();
+    });
+  }
 };
 </script>
+
+<style lang="scss" scoped>
+@import url("https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css");
+</style>

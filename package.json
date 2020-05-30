@@ -15,6 +15,7 @@
     "@nuxtjs/axios": "^5.10.3",
     "@nuxtjs/dotenv": "^1.4.0",
     "@nuxtjs/pwa": "^3.0.0-0",
+    "jquery": "^3.5.1",
     "nuxt": "^2.0.0",
     "v-owl-carousel": "^1.0.8",
     "vue-owl-carousel": "^2.0.3"
