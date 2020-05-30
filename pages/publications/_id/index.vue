@@ -37,7 +37,7 @@
                         </v-btn>-->
                         <v-btn
                           color="success"
-                          v-if="post.accountId == $auth.user.id"
+                          v-if="$auth.loggedIn && post.accountId == $auth.user.id"
                           text
                           depressed
                           small
@@ -47,7 +47,7 @@
                           <v-icon left>mdi-pencil</v-icon>modifier
                         </v-btn>
                         <v-btn
-                          v-if="post.accountId == $auth.user.id"
+                          v-if="$auth.loggedIn && post.accountId == $auth.user.id"
                           color="warning"
                           small
                           text
