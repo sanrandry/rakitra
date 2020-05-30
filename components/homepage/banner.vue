@@ -1,8 +1,12 @@
 <template>
   <v-lazy transition="fade">
     <div>
-      <v-parallax height="300" src="https://picsum.photos/1280?random">
-        <v-row align="center" justify="center">
+      <v-parallax
+        id="home_parallax"
+        height="300"
+        :src="require('@/assets/images/homepage/book.jpg')"
+      >
+        <v-row align="center" justify="center" no-gutters>
           <v-col class="text-center" cols="12">
             <h1 class="display-1 font-weight-thin mb-4">Madagascar: Informer et s’informer autrement</h1>
             <h4 class="subheading">"Écrivons notre histoire et Écrivons l’histoire" ASA</h4>
@@ -19,6 +23,8 @@
             ></v-text-field>
           </v-col>
         </v-row>
+        <!-- <v-overlay absolute :value="true">
+        </v-overlay>-->
       </v-parallax>
     </div>
   </v-lazy>
@@ -28,5 +34,11 @@
 export default {};
 </script>
 
-<style>
+<style lang="scss">
+#home_parallax {
+  .v-parallax__content {
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    // background-color: red !important;
+  }
+}
 </style>

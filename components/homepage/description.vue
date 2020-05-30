@@ -14,7 +14,7 @@
         </v-col>
         <v-col md="2">
           <v-img
-            src="https://picsum.photos/500/300?random"
+            :src="require('@/assets/images/logo/rakitra_logo.png')"
             :lazy-src="require('@/assets/images/logo/rakitra_logo.png')"
             contain
           >

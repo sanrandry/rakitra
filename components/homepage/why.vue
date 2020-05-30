@@ -6,8 +6,9 @@
           <v-img
             class="white--text align-end"
             height="200px"
+            contain
             :lazy-src="require('@/assets/images/logo/rakitra_logo.png')"
-            src="https://picsum.photos/1080"
+            :src="require('@/assets/images/homepage/illustrationCut.jpg')"
           >
             <template v-slot:placeholder>
               <v-img-lazy-loading></v-img-lazy-loading>

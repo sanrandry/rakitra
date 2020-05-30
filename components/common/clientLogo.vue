@@ -1,7 +1,7 @@
 <template>
   <v-img
+    :src="src"
     :lazy-src="require('@/assets/images/logo/rakitra_logo.png')"
-    src="https://picsum.photos/1080"
     height="100"
     contain
   >
@@ -14,6 +14,7 @@
 <script>
 import vImgLazyLoading from "@/components/common/vImgLazyLoading";
 export default {
+  props: ["src"],
   components: {
     "v-img-lazy-loading": vImgLazyLoading
   }

@@ -9,20 +9,7 @@
       <v-row>
         <v-col>
           <carousel :nav="false" :items="6" :loop="true" :autoplay="true" :dots="false">
-            <client-logo />
-            <client-logo />
-            <client-logo />
-            <client-logo />
-            <client-logo />
-            <client-logo />
-            <client-logo />
-            <client-logo />
-            <client-logo />
-            <client-logo />
-            <client-logo />
-            <client-logo />
-            <client-logo />
-            <client-logo />
+            <client-logo v-for="item in clients" :key="item.logo" :src="item.logo" />
           </carousel>
         </v-col>
       </v-row>
@@ -35,6 +22,30 @@ import clientLogo from "@/components/common/clientLogo";
 export default {
   components: {
     "client-logo": clientLogo
+  },
+  data() {
+    return {
+      clients: [
+        {
+          logo: require("@/assets/images/logo/sponsors/asa.png")
+        },
+        {
+          logo: require("@/assets/images/logo/sponsors/inmada.jpg")
+        },
+        {
+          logo: require("@/assets/images/logo/sponsors/logo-toro.png")
+        },
+        {
+          logo: require("@/assets/images/logo/sponsors/Logo-tsik-Medical.png")
+        },
+        {
+          logo: require("@/assets/images/logo/sponsors/virSchool.png")
+        },
+        {
+          logo: require("@/assets/images/logo/sponsors/youngDev.jpg")
+        }
+      ]
+    };
   }
 };
 </script>

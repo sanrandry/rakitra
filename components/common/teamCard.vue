@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-card flat class="m-2" hover>
+  <div v-if="item">
+    <v-card flat class="m-2">
       <v-card-text class="text-center">
         <v-avatar size="130">
           <v-img
@@ -27,13 +27,18 @@
 <script>
 import vImgLazyLoading from "@/components/common/vImgLazyLoading";
 export default {
+  props: {
+    item: {
+      required: true
+    }
+  },
   data() {
     return {
-      item: {
-        image: "https://picsum.photos/1080",
-        name: "santatriniana alain ambinitsoa",
-        status: "tsy an'asa"
-      }
+      // item: {
+      //   image: "https://picsum.photos/1080",
+      //   name: "santatriniana alain ambinitsoa",
+      //   status: "tsy an'asa"
+      // }
     };
   },
   components: {
