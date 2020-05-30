@@ -13,7 +13,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-app-bar :clipped-left="clipped" fixed dense elevate-on-scroll color="white" app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="hidden-md-and-up" />
       <v-toolbar-title v-text="title" />
       <v-spacer />
       <v-btn text class="text-capitalize font-weight-light" nuxt to="/">Accueil</v-btn>

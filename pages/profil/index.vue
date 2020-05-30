@@ -24,8 +24,6 @@
         </v-list>
       </v-col>
     </v-row>
-    <nuxt-link to="/profil/editor">editor</nuxt-link>
-    {{user_posts}}
     <v-row>
       <v-col cols="12" md="3" v-for="item in user_posts" :key="item.id">
         <post-card :post_id="item.id"></post-card>
