@@ -1,6 +1,6 @@
 <template>
   <v-lazy group transition="fade-transition">
-    <div v-if="!post">loading...</div>
+    <circular-loading v-if="!post"></circular-loading>
     <div v-if="post">
       <v-container>
         <v-row>
@@ -93,11 +93,15 @@
 </template>
 
 <script>
+import circularLoading from "@/components/common/circularLoading";
 export default {
   data: () => {
     return {
       post: ""
     };
+  },
+  components: {
+    "circular-loading": circularLoading
   },
   mounted() {
     this.fetch_post();

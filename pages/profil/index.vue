@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import circularLoading from "@/components/common/circularLoading";
 import postCard from "@/components/post/postCard";
 export default {
   data() {
@@ -42,7 +43,8 @@ export default {
     };
   },
   components: {
-    "post-card": postCard
+    "post-card": postCard,
+    "circular-loading": circularLoading
   },
   mounted() {
     // fetch curent user post
