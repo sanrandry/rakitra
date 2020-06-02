@@ -24,6 +24,7 @@
         </v-list>
       </v-col>
     </v-row>
+    <circular-loading v-if="user_posts.length <= 0"></circular-loading>
     <v-row>
       <v-col cols="12" md="3" v-for="item in user_posts" :key="item.id">
         <post-card :post_id="item.id"></post-card>

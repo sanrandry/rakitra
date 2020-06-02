@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form>
+    <form id="post_form">
       <v-stepper v-model="e" vertical>
         <v-stepper-step :complete="e > 1" step="1" editable>Informations générales</v-stepper-step>
 
@@ -72,7 +72,7 @@
         <v-stepper-content step="3">
           <v-row>
             <v-col cols="12">
-              <v-textarea v-model="post_data.content" filled label="contenu"></v-textarea>
+              <textarea id="summernote" v-model="post_data.content"></textarea>
             </v-col>
           </v-row>
           <v-row>
@@ -105,6 +105,7 @@ export default {
     };
   },
   mounted() {
+    this.initialize_summernote();
     this.fetch_categories();
     // verify if we have a post id
     if (this.$route.query.id) {
@@ -130,6 +131,8 @@ export default {
           this.post_data.title = post.title;
           this.post_data.excerpt = post.excerpt;
           this.post_data.content = post.content;
+          // modify the summernote code
+          this.set_editor_code(post.content);
           // get post cover image
           try {
             let cover_image = await this.$axios.$get(
@@ -151,6 +154,27 @@ export default {
         console.log(error);
       }
     },
+    initialize_summernote() {
+      let summernote_config = {
+        // airMode: true
+        height: 300,
+        lang: "fr-FR",
+        toolbar: [
+          ["style", ["style"]],
+          ["font", ["bold", "underline", "clear"]],
+          ["fontname", ["fontname"]],
+          ["color", ["color"]],
+          ["para", ["ul", "ol", "paragraph"]],
+          ["table", ["table"]],
+          ["insert", ["link", "picture", "video"]]
+          // ["view", ["fullscreen", "codeview", "help"]]
+        ]
+      };
+      $("#summernote").summernote(summernote_config);
+    },
+    set_editor_code(code) {
+      $("#summernote").summernote("code", code);
+    },
     get_image(file) {
       console.log(file);
       if (!file) {
@@ -163,6 +187,7 @@ export default {
       reader.readAsDataURL(file);
     },
     submit() {
+      console.log($("#summernote").summernote("code"));
       if (this.$route.query.id) {
         this.update();
       } else {
@@ -176,7 +201,7 @@ export default {
         let post = {
           title: this.post_data.title,
           excerpt: this.post_data.excerpt,
-          content: this.post_data.content
+          content: $("#summernote").summernote("code")
         };
         // create the post
         let posted_post = await this.$axios.$post(
@@ -220,7 +245,7 @@ export default {
         let post = {
           title: this.post_data.title,
           excerpt: this.post_data.excerpt,
-          content: this.post_data.content
+          content: $("#summernote").summernote("code")
         };
         // update the post
         const updated_post = await this.$axios.$put(
@@ -301,5 +326,6 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+@import url("https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css");
 </style>

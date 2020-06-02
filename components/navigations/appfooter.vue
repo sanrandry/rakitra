@@ -29,6 +29,12 @@
               <div>
                 <nuxt-link to="/donation" class="footer_link black--text body-2">Nous soutenir</nuxt-link>
               </div>
+              <div>
+                <nuxt-link
+                  :to="{name: 'about'}"
+                  class="footer_link black--text body-2"
+                >À propos de Rakitra</nuxt-link>
+              </div>
             </v-col>
             <v-col md="4">
               <div>Nos coordonnées</div>
@@ -45,10 +51,13 @@
             <v-col md="4">
               <div>Espace Rakitra</div>
               <div>
-                <nuxt-link to="#" class="footer_link black--text body-2">Communautés développeurs</nuxt-link>
+                <nuxt-link
+                  :to="{name: 'faq'}"
+                  class="footer_link black--text body-2"
+                >Foire aux questions</nuxt-link>
               </div>
               <div>
-                <nuxt-link to="#" class="footer_link black--text body-2">Communautés Ecrivain</nuxt-link>
+                <nuxt-link to="#" class="footer_link black--text body-2">Communautés développeurs</nuxt-link>
               </div>
               <div>
                 <nuxt-link to="#" class="footer_link black--text body-2">Condition d'utilisation</nuxt-link>

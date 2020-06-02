@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <circular-loading v-if="posts.length <= 0"></circular-loading>
     <v-row>
       <v-col cols="12" md="3" v-for="item in posts" :key="item.id">
         <post-card :post_id="item.id"></post-card>
@@ -9,6 +10,7 @@
 </template>
 
 <script>
+import circularLoading from "@/components/common/circularLoading";
 import postCard from "@/components/post/postCard";
 export default {
   head: function() {
@@ -22,7 +24,8 @@ export default {
     };
   },
   components: {
-    "post-card": postCard
+    "post-card": postCard,
+    "circular-loading": circularLoading
   },
   mounted() {
     this.fetch_post();

@@ -27,7 +27,7 @@ export default {
       {
         rel: "stylesheet",
         href:
-          "https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
+          "https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css"
       }
     ],
     script: [
@@ -47,7 +47,11 @@ export default {
       },
       {
         src:
-          "https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js",
+          "https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js",
+        type: "text/javascript"
+      },
+      {
+        src: "/js/summernote/summernote-fr-FR.js",
         type: "text/javascript"
       }
     ]
@@ -64,7 +68,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: [],
+  css: ["@/static/css/main.css"],
   /*
    ** Plugins to load before mounting the App
    */

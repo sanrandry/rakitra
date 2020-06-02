@@ -1,11 +1,15 @@
 <template>
-  <v-lazy group transition="fade-transition">
+  <v-lazy transition="fade-transition">
     <div v-if="!post">loading...</div>
     <v-hover v-if="post">
       <template v-slot:default="{hover}">
         <v-card @click="read(post.id)" flat class="mx-2 my-2">
           <v-list-item>
-            <v-list-item-avatar color="grey"></v-list-item-avatar>
+            <v-list-item-avatar>
+              <v-avatar color="deep-purple darken-2" size="32">
+                <span class="white--text subtitle-2">{{post.account.name | first_letter}}</span>
+              </v-avatar>
+            </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title class>{{post.account.name}}</v-list-item-title>
               <v-list-item-subtitle>1 h</v-list-item-subtitle>

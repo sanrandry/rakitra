@@ -1,5 +1,5 @@
 <template>
-  <v-layout row wrap>
+  <v-layout row wrap id="inspire">
     <v-container grid-list-xs>
       <v-row justify="center">
         <v-col cols="3">
@@ -47,4 +47,6 @@ export default {
 
 <style lang="scss" scoped>
 @import url("https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css");
+#inspire {
+}
 </style>
