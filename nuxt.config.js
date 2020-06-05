@@ -97,8 +97,8 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: "https://rakitrabackend.herokuapp.com/api"
-    // baseURL: "http://localhost:3001/api"
+    // baseURL: "https://rakitrabackend.herokuapp.com/api"
+    baseURL: "http://localhost:3001/api"
   },
 
   /**
@@ -155,6 +155,8 @@ export default {
    ** Build configuration
    */
   build: {
+    // Add exception
+    transpile: ["vee-validate/dist/rules"],
     /*
      ** You can extend webpack config here
      */

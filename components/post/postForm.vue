@@ -1,93 +1,135 @@
 <template>
   <div>
-    <form id="post_form">
-      <v-stepper v-model="e" vertical>
-        <v-stepper-step :complete="e > 1" step="1" editable>Informations générales</v-stepper-step>
+    <validation-observer ref="post_form_validation" v-slot="{invalid}">
+      <form id="post_form">
+        <v-stepper v-model="e" vertical>
+          <v-stepper-step :complete="e > 1" step="1" editable>Informations générales</v-stepper-step>
 
-        <v-stepper-content step="1">
-          <v-row no-gutters>
-            <v-col cols="12">
-              <v-text-field v-model="post_data.title" filled label="Titre"></v-text-field>
-            </v-col>
-          </v-row>
-          <v-row no-gutters>
-            <v-col cols="12">
-              <v-text-field v-model="post_data.excerpt" filled label="Description"></v-text-field>
-            </v-col>
-          </v-row>
+          <v-stepper-content step="1">
+            <validation-observer v-slot="{invalid}">
+              <v-row no-gutters>
+                <v-col cols="12">
+                  <validation-provider name="titre" rules="required" v-slot="{errors}">
+                    <v-text-field
+                      v-model="post_data.title"
+                      filled
+                      label="Titre"
+                      :error-messages="errors"
+                    ></v-text-field>
+                  </validation-provider>
+                </v-col>
+              </v-row>
+              <v-row no-gutters>
+                <v-col cols="12">
+                  <validation-provider name="description" rules="required" v-slot="{errors}">
+                    <v-text-field
+                      :error-messages="errors"
+                      v-model="post_data.excerpt"
+                      filled
+                      label="Description"
+                    ></v-text-field>
+                  </validation-provider>
+                </v-col>
+              </v-row>
 
-          <v-row no-gutters>
-            <v-col cols="12">
-              <v-select
-                v-model="post_data.category"
-                filled
-                :items="categories"
-                item-text="name"
-                item-value="id"
-                clearable
-                label="catégorie"
-              ></v-select>
-            </v-col>
-          </v-row>
+              <v-row no-gutters>
+                <v-col cols="12">
+                  <v-select
+                    v-model="post_data.category"
+                    filled
+                    :items="categories"
+                    item-text="name"
+                    item-value="id"
+                    clearable
+                    label="catégorie"
+                  ></v-select>
+                </v-col>
+              </v-row>
 
-          <v-row>
-            <v-col cols="12" class="d-flex justify-end">
-              <v-btn color="primary" class="text-capitalize" @click="e = 2">Continue</v-btn>
+              <v-row>
+                <v-col cols="12" class="d-flex justify-end">
+                  <v-btn
+                    :disabled="invalid"
+                    color="primary"
+                    class="text-capitalize mr-2"
+                    @click="go_to_step(2)"
+                  >Continue</v-btn>
 
-              <v-btn text class="text-capitalize">Annuler</v-btn>
-            </v-col>
-          </v-row>
-        </v-stepper-content>
+                  <v-btn text class="text-capitalize" nuxt :to="{name: 'profil'}">Annuler</v-btn>
+                </v-col>
+              </v-row>
+            </validation-observer>
+          </v-stepper-content>
 
-        <v-stepper-step :complete="e > 2" step="2" editable>Image de courverture</v-stepper-step>
+          <v-stepper-step :complete="e > 2" step="2" editable>Image de courverture</v-stepper-step>
 
-        <v-stepper-content step="2">
-          <v-row no-gutters>
-            <v-col cols="12">
-              <v-file-input
-                accept="image/png, image/jpeg, image/bmp"
-                placeholder="Image de couverture"
-                label="image de couverture"
-                filled
-                @change="get_image($event)"
-                prepend-icon="mdi-camera"
-              ></v-file-input>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="12" md="4" class="mx-auto">
-              <v-img :src="post_data.cover_image"></v-img>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="12" class="d-flex justify-end">
-              <v-btn color="primary" class="text-capitalize" @click="e = 3">Continue</v-btn>
-              <v-btn text class="text-capitalize" @click="e = 1">Retour</v-btn>
-            </v-col>
-          </v-row>
-        </v-stepper-content>
+          <v-stepper-content step="2">
+            <v-row no-gutters>
+              <v-col cols="12">
+                <v-file-input
+                  accept="image/png, image/jpeg, image/bmp"
+                  placeholder="Image de couverture"
+                  label="image de couverture"
+                  filled
+                  @change="get_image($event)"
+                  prepend-icon="mdi-camera"
+                ></v-file-input>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="12" md="4" class="mx-auto">
+                <v-img :src="post_data.cover_image"></v-img>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="12" class="d-flex justify-end">
+                <v-btn color="primary" class="text-capitalize" @click="go_to_step(3)">Continue</v-btn>
+                <v-btn text class="text-capitalize" @click="e = 1">Retour</v-btn>
+              </v-col>
+            </v-row>
+          </v-stepper-content>
 
-        <v-stepper-step step="3" editable>contenu</v-stepper-step>
+          <v-stepper-step step="3" editable>contenu</v-stepper-step>
 
-        <v-stepper-content step="3">
-          <v-row>
-            <v-col cols="12">
-              <textarea id="summernote" v-model="post_data.content"></textarea>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="12" class="d-flex justify-end">
-              <v-btn :loading="submit_btn_loading" color="success" cal @click="submit()">Publier</v-btn>
-              <v-btn text>Annuler</v-btn>
-            </v-col>
-          </v-row>
-        </v-stepper-content>
-      </v-stepper>
-    </form>
+          <v-stepper-content step="3">
+            <v-row>
+              <v-col cols="12">
+                <textarea id="summernote" v-model="post_data.content"></textarea>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="12" class="d-flex justify-end">
+                <v-btn
+                  :loading="submit_btn_loading"
+                  color="success"
+                  :disabled="invalid"
+                  @click="submit()"
+                  class="mr-2"
+                >Publier</v-btn>
+                <v-btn text nuxt :to="{name: 'profil'}">Annuler</v-btn>
+              </v-col>
+            </v-row>
+          </v-stepper-content>
+        </v-stepper>
+      </form>
+    </validation-observer>
   </div>
 </template>
 
 <script>
+import {
+  ValidationProvider,
+  extend,
+  localize,
+  ValidationObserver
+} from "vee-validate";
+import { required } from "vee-validate/dist/rules";
+import fr from "vee-validate/dist/locale/fr.json";
+// form validation
+localize("fr", fr);
+extend("required", {
+  ...required
+});
 export default {
   data() {
     return {
@@ -103,6 +145,11 @@ export default {
         cover_image: ""
       }
     };
+  },
+  computed: {},
+  components: {
+    ValidationObserver,
+    ValidationProvider
   },
   mounted() {
     this.initialize_summernote();
@@ -186,8 +233,35 @@ export default {
       };
       reader.readAsDataURL(file);
     },
-    submit() {
-      console.log($("#summernote").summernote("code"));
+    // steppers logic and validation
+    go_to_step(step) {
+      this.e = step;
+    },
+    // post data validation
+    async validate() {
+      // verify ify the summernote is empty
+      // <p><br></p> is the summernote default empty value
+      if ($("#summernote").summernote("code") != "<p><br></p>") {
+        // vee-ledate validation
+        let is_form_valid = await this.$refs.post_form_validation.validate();
+        if (is_form_valid) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+      return false;
+    },
+    // submition handler
+    async submit() {
+      // last form validation
+      if (!(await this.validate())) {
+        this.$store.dispatch("snack/show", {
+          text: "veuillez remplir le formulaire"
+        });
+        return;
+      }
+      // if it is valid
       if (this.$route.query.id) {
         this.update();
       } else {
@@ -232,6 +306,7 @@ export default {
           }
         }
         this.submit_btn_loading = false;
+        this.$store.dispatch("snack/show", { text: "publication avec succès" });
         this.$router.push({ path: "/profil" });
       } catch (error) {
         console.log(error);
@@ -316,6 +391,7 @@ export default {
           }
         }
         this.submit_btn_loading = false;
+        this.$store.dispatch("snack/show", { text: "mis à jour avec succès" });
         this.$router.push({ name: "profil" });
       } catch (error) {
         this.submit_btn_loading = false;
