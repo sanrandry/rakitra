@@ -15,6 +15,9 @@
         <v-row justify="center">
           <v-col cols="12" md="5">
             <v-text-field
+              v-model="key"
+              @click:append="search()"
+              @keydown.enter="search()"
               append-icon="mdi-magnify"
               flat
               hide-no-data
@@ -31,7 +34,18 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data: function() {
+    return {
+      key: ""
+    };
+  },
+  methods: {
+    search() {
+      this.$router.push({ name: "publications", query: { key: this.key } });
+    }
+  }
+};
 </script>
 
 <style lang="scss">

@@ -19,7 +19,8 @@
     "nuxt": "^2.0.0",
     "v-owl-carousel": "^1.0.8",
     "vee-validate": "^3.3.2",
-    "vue-owl-carousel": "^2.0.3"
+    "vue-owl-carousel": "^2.0.3",
+    "vue-underscore": "^0.1.4"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.0.0"

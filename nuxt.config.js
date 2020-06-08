@@ -74,6 +74,7 @@ export default {
    */
   plugins: [
     { src: "plugins/owl.js", mode: "client" },
+    { src: "plugins/underscore.js", mode: "client" },
     { src: "plugins/profileAvatar.js" }
   ],
   /*
@@ -97,8 +98,8 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: "https://rakitrabackend.herokuapp.com/api"
-    // baseURL: "http://localhost:3001/api"
+    baseURL: "http://localhost:3001/api"
+    // baseURL: "https://rakitrabackend.herokuapp.com/api"
   },
 
   /**
