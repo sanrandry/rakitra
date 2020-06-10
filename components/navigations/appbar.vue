@@ -12,9 +12,19 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar :clipped-left="clipped" fixed dense elevate-on-scroll color="white" app>
+    <v-app-bar
+      hide-on-scroll
+      :clipped-left="clipped"
+      fixed
+      dense
+      elevate-on-scroll
+      color="white"
+      app
+    >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="hidden-md-and-up" />
-      <v-toolbar-title v-text="title" />
+      <v-toolbar-title @click="$router.push('/')" style="cursor: pointer;">
+        <v-img :src="require('@/assets/images/logo/rakitra_logo.png')" width="112"></v-img>
+      </v-toolbar-title>
       <v-spacer />
       <v-btn text class="text-capitalize font-weight-light" nuxt to="/">Accueil</v-btn>
       <v-btn text class="text-capitalize font-weight-light" nuxt to="/publications">Articles</v-btn>
@@ -23,16 +33,16 @@
           <v-btn v-on="on" text class="text-capitalize font-weight-light">Catalogue</v-btn>
         </template>
         <v-list>
-          <v-list-item>
+          <v-list-item nuxt :to="{name: 'livres'}">
             <v-list-item-title>Taloha</v-list-item-title>
           </v-list-item>
-          <v-list-item>
+          <v-list-item @click="comming_soon()">
             <v-list-item-title>Biographie</v-list-item-title>
           </v-list-item>
-          <v-list-item>
+          <v-list-item @click="comming_soon()">
             <v-list-item-title>Publication scientifique</v-list-item-title>
           </v-list-item>
-          <v-list-item>
+          <v-list-item @click="comming_soon()">
             <v-list-item-title>Documentation</v-list-item-title>
           </v-list-item>
         </v-list>
@@ -108,6 +118,11 @@ export default {
     logout() {
       localStorage.removeItem("uid");
       this.$auth.logout();
+    },
+    comming_soon() {
+      this.$store.dispatch("snack/show", {
+        text: "Cette fonctionalité est en cours de développement"
+      });
     }
   }
 };
