@@ -6,6 +6,7 @@
           <v-col>
             <validation-provider name="email" v-slot="{ errors }" rules="required|email">
               <v-text-field
+                color="rgba(0, 0, 0, 0.54)"
                 type="email"
                 name="email"
                 v-model="login_data.email"
@@ -20,6 +21,7 @@
           <v-col>
             <validation-provider v-slot="{ errors }" name="mot de passe" rules="required">
               <v-text-field
+                color="rgba(0, 0, 0, 0.54)"
                 name="password"
                 :type="login_data.password_show ? 'text' : 'password'"
                 :append-icon="

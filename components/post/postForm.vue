@@ -3,7 +3,7 @@
     <validation-observer ref="post_form_validation" v-slot="{invalid}">
       <form id="post_form">
         <v-stepper v-model="e" vertical>
-          <v-stepper-step :complete="e > 1" step="1" editable>Informations générales</v-stepper-step>
+          <v-stepper-step :complete="e > 1" step="1" editable color="success">Informations générales</v-stepper-step>
 
           <v-stepper-content step="1">
             <validation-observer v-slot="{invalid}">
@@ -11,6 +11,7 @@
                 <v-col cols="12">
                   <validation-provider name="titre" rules="required" v-slot="{errors}">
                     <v-text-field
+                      color="rgba(0, 0, 0, 0.54)"
                       v-model="post_data.title"
                       filled
                       label="Titre"
@@ -23,6 +24,7 @@
                 <v-col cols="12">
                   <validation-provider name="description" rules="required" v-slot="{errors}">
                     <v-text-field
+                      color="rgba(0, 0, 0, 0.54)"
                       :error-messages="errors"
                       v-model="post_data.excerpt"
                       filled
@@ -35,6 +37,7 @@
               <v-row no-gutters>
                 <v-col cols="12">
                   <v-select
+                    color="rgba(0, 0, 0, 0.54)"
                     v-model="post_data.category"
                     filled
                     :items="categories"
@@ -61,12 +64,13 @@
             </validation-observer>
           </v-stepper-content>
 
-          <v-stepper-step :complete="e > 2" step="2" editable>Image de courverture</v-stepper-step>
+          <v-stepper-step :complete="e > 2" step="2" editable color="success">Image de courverture</v-stepper-step>
 
           <v-stepper-content step="2">
             <v-row no-gutters>
               <v-col cols="12">
                 <v-file-input
+                  color="rgba(0, 0, 0, 0.54)"
                   accept="image/png, image/jpeg, image/bmp"
                   placeholder="Image de couverture"
                   label="image de couverture"
@@ -89,7 +93,7 @@
             </v-row>
           </v-stepper-content>
 
-          <v-stepper-step step="3" editable>contenu</v-stepper-step>
+          <v-stepper-step step="3" editable color="success">contenu</v-stepper-step>
 
           <v-stepper-content step="3">
             <v-row>

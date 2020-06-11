@@ -5,7 +5,7 @@
       v-if="tab == 'login'"
     >céer votre compte - c'est gratuit !</v-card-text>
     <!-- <v-card-text>céer votre compte - c'est gratuit !</v-card-text> -->
-    <v-tabs centered v-model="tab">
+    <v-tabs centered v-model="tab" color="rgba(0, 0, 0, 0.78)">
       <v-tab href="#login">Se connecter</v-tab>
       <v-tab href="#signup">S'inscrire</v-tab>
     </v-tabs>

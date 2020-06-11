@@ -6,6 +6,7 @@
           <v-col>
             <validation-provider name="nom" rules="required" v-slot="{errors}">
               <v-text-field
+                color="rgba(0, 0, 0, 0.54)"
                 name="name"
                 v-model="signup_data.name"
                 label="Nom"
@@ -18,6 +19,7 @@
           <v-col>
             <validation-provider name="e-mail" rules="required|email" v-slot="{errors}">
               <v-text-field
+                color="rgba(0, 0, 0, 0.54)"
                 name="email"
                 v-model="signup_data.email"
                 label="Email"
@@ -35,6 +37,7 @@
               vid="signup_data.password"
             >
               <v-text-field
+                color="rgba(0, 0, 0, 0.54)"
                 name="password"
                 :type="signup_data.password_show ? 'text' : 'password'"
                 :append-icon="signup_data.password_show ? 'mdi-eye-off' : 'mdi-eye'"
@@ -54,6 +57,7 @@
               v-slot="{errors}"
             >
               <v-text-field
+                color="rgba(0, 0, 0, 0.54)"
                 name="password_confirm"
                 v-model="signup_data.password_confirm"
                 :type="signup_data.confirm_password_show ? 'text' : 'password'"

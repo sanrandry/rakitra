@@ -3,6 +3,7 @@
     <v-row>
       <v-col cols="12" md="12">
         <v-text-field
+          v-model="key"
           class="headline"
           height="50"
           @keyup="searchDebounce()"
@@ -24,16 +25,7 @@
         </v-row>
       </v-col>
       <v-col cols="12" md="3">
-        <v-row>
-          <v-col>
-            <div class="subtitle-1">Thème</div>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col>
-            <category-chips></category-chips>
-          </v-col>
-        </v-row>
+        <post-side-nav></post-side-nav>
       </v-col>
     </v-row>
   </v-container>
@@ -42,7 +34,7 @@
 <script>
 import circularLoading from "@/components/common/circularLoading";
 import postCard from "@/components/post/postCard";
-import categoryChips from "@/components/common/categoryChips";
+import postSideNav from "@/components/navigations/postSideNav";
 export default {
   head: function() {
     return {
@@ -59,7 +51,7 @@ export default {
   components: {
     "post-card": postCard,
     "circular-loading": circularLoading,
-    "category-chips": categoryChips
+    "post-side-nav": postSideNav
   },
   created() {
     this.searchDebounce = this.$_.debounce(this.search, 500);

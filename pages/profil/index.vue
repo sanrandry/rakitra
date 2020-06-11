@@ -24,7 +24,7 @@
         </v-list>
       </v-col>
     </v-row>
-    <circular-loading v-if="user_posts.length <= 0"></circular-loading>
+    <circular-loading v-if="post_loading"></circular-loading>
     <v-row>
       <v-col cols="12" md="3" v-for="item in user_posts" :key="item.id">
         <post-card :post_id="item.id"></post-card>
@@ -39,6 +39,7 @@ import postCard from "@/components/post/postCard";
 export default {
   data() {
     return {
+      post_loading: false,
       user_posts: []
     };
   },
@@ -53,6 +54,7 @@ export default {
   methods: {
     async fetch_user_post() {
       try {
+        this.post_loading = true;
         let filter = { fields: { id: true } };
         this.user_posts = await this.$axios.$get(
           "accounts/" +
@@ -60,7 +62,9 @@ export default {
             "/posts?filter=" +
             encodeURI(JSON.stringify(filter))
         );
+        this.post_loading = false;
       } catch (error) {
+        this.post_loading = false;
         console.log(error.response);
       }
     }
