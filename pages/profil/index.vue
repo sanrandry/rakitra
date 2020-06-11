@@ -26,7 +26,7 @@
     </v-row>
     <circular-loading v-if="post_loading"></circular-loading>
     <v-row>
-      <v-col cols="12" md="3" v-for="item in user_posts" :key="item.id">
+      <v-col cols="12" md="3" sm="6" v-for="item in user_posts" :key="item.id">
         <post-card :post_id="item.id"></post-card>
       </v-col>
     </v-row>

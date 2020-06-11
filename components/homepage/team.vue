@@ -9,7 +9,13 @@
 
       <v-row>
         <v-col cols="12">
-          <carousel :nav="false" :items="5" :loop="true" :autoplay="true" :dots="false">
+          <carousel
+            :nav="false"
+            :items="$vuetify.breakpoint.smAndDown ? 1 : 5"
+            :loop="true"
+            :autoplay="true"
+            :dots="false"
+          >
             <team-card v-for="item in team" :key="item.name" :item="item"></team-card>
           </carousel>
         </v-col>

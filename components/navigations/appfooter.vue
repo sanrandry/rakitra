@@ -16,7 +16,7 @@
             </v-btn>
           </div>
         </v-col>
-        <v-col cols="12">
+        <v-col cols="12" class="hidden-sm-and-down">
           <v-row justify="space-around">
             <v-col md="4">
               <div>Menu</div>

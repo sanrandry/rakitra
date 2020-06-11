@@ -2,7 +2,7 @@
   <v-layout row wrap>
     <v-container grid-list-xs>
       <v-row justify="center">
-        <v-col lg="3" md="4" sm="12">
+        <v-col lg="3" md="4" sm="8" xs="12">
           <auth-card />
         </v-col>
       </v-row>

@@ -19,7 +19,7 @@
     <v-row>
       <v-col cols="12" md="9">
         <v-row>
-          <v-col cols="12" md="4" v-for="item in posts" :key="item.id">
+          <v-col cols="12" md="4" sm="6" v-for="item in posts" :key="item.id">
             <post-card :post_id="item.id"></post-card>
           </v-col>
         </v-row>

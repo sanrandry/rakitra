@@ -3,9 +3,6 @@
     <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" fixed app>
       <v-list>
         <v-list-item v-for="(item, i) in items" :key="i" :to="item.to" router exact>
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title v-text="item.title" />
           </v-list-item-content>
@@ -13,7 +10,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-app-bar
-      hide-on-scroll
+      :hide-on-scroll="!$vuetify.breakpoint.smAndDown"
       :clipped-left="clipped"
       fixed
       dense
@@ -22,15 +19,28 @@
       app
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="hidden-md-and-up" />
-      <v-toolbar-title @click="$router.push('/')" style="cursor: pointer;">
+      <v-toolbar-title
+        @click="$router.push('/')"
+        style="cursor: pointer;"
+        class="hidden-sm-and-down"
+      >
         <v-img :src="require('@/assets/images/logo/rakitra_logo.png')" width="112"></v-img>
       </v-toolbar-title>
       <v-spacer />
-      <v-btn text class="text-capitalize font-weight-light" nuxt to="/">Accueil</v-btn>
-      <v-btn text class="text-capitalize font-weight-light" nuxt to="/publications">Articles</v-btn>
+      <v-btn text class="text-capitalize font-weight-light hidden-sm-and-down" nuxt to="/">Accueil</v-btn>
+      <v-btn
+        text
+        class="text-capitalize font-weight-light hidden-sm-and-down"
+        nuxt
+        to="/publications"
+      >Articles</v-btn>
       <v-menu offset-y transition="slide-y-transition">
         <template v-slot:activator="{on}">
-          <v-btn v-on="on" text class="text-capitalize font-weight-light">Catalogue</v-btn>
+          <v-btn
+            v-on="on"
+            text
+            class="text-capitalize font-weight-light hidden-sm-and-down"
+          >Catalogue</v-btn>
         </template>
         <v-list>
           <v-list-item nuxt :to="{name: 'livres'}">
@@ -47,7 +57,12 @@
           </v-list-item>
         </v-list>
       </v-menu>
-      <v-btn text class="text-capitalize font-weight-light" nuxt to="/donation">Nous soutenir</v-btn>
+      <v-btn
+        text
+        class="text-capitalize font-weight-light hidden-sm-and-down"
+        nuxt
+        to="/donation"
+      >Nous soutenir</v-btn>
       <v-btn
         v-if="!$auth.loggedIn"
         text
@@ -96,17 +111,17 @@ export default {
         {
           icon: "mdi-apps",
           title: "Articles",
-          to: "/"
-        },
-        {
-          icon: "mdi-apps",
-          title: "Articles",
-          to: "/"
+          to: "/publications"
         },
         {
           icon: "mdi-chart-bubble",
-          title: "Inspire",
-          to: "/inspire"
+          title: "Taloha",
+          to: "/livres"
+        },
+        {
+          icon: "mdi-chart-bubble",
+          title: "Nous soutenir",
+          to: "/donation"
         }
       ],
       miniVariant: false,
