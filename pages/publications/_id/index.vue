@@ -26,7 +26,7 @@
 
                     <v-list-item-content>
                       <v-list-item-title>{{post.account.name}}</v-list-item-title>
-                      <v-list-item-subtitle>il y a</v-list-item-subtitle>
+                      <v-list-item-subtitle>il y a {{post.updated_at | relativeDate}}</v-list-item-subtitle>
                     </v-list-item-content>
 
                     <v-list-item-action>
@@ -97,11 +97,11 @@ import circularLoading from "@/components/common/circularLoading";
 export default {
   data: () => {
     return {
-      post: ""
+      post: "",
     };
   },
   components: {
-    "circular-loading": circularLoading
+    "circular-loading": circularLoading,
   },
   mounted() {
     this.fetch_post();
@@ -112,12 +112,12 @@ export default {
         const filter = {
           include: [
             {
-              relation: "account"
+              relation: "account",
             },
             {
-              relation: "images"
-            }
-          ]
+              relation: "images",
+            },
+          ],
         };
         this.post = await this.$axios.$get(
           "/posts/" +
@@ -148,7 +148,7 @@ export default {
           "/posts/" + post_id + "/categories"
         );
         if (post_categories && post_categories.length > 0) {
-          post_categories.forEach(async element => {
+          post_categories.forEach(async (element) => {
             await this.$axios.$delete(
               "/posts/" + post_id + "/categories/rel/" + element.id
             );
@@ -160,8 +160,8 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
