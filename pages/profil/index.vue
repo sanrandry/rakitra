@@ -12,7 +12,7 @@
 
             <v-list-item-content>
               <v-list-item-title>{{$auth.user.name}}</v-list-item-title>
-              <v-list-item-subtitle>12 publications</v-list-item-subtitle>
+              <v-list-item-subtitle>{{publicatin_nuber}} publication(s)</v-list-item-subtitle>
             </v-list-item-content>
 
             <v-list-item-action>
@@ -40,12 +40,13 @@ export default {
   data() {
     return {
       post_loading: false,
-      user_posts: []
+      user_posts: [],
+      publicatin_nuber: 0,
     };
   },
   components: {
     "post-card": postCard,
-    "circular-loading": circularLoading
+    "circular-loading": circularLoading,
   },
   mounted() {
     // fetch curent user post
@@ -63,12 +64,24 @@ export default {
             encodeURI(JSON.stringify(filter))
         );
         this.post_loading = false;
+        this.fetch_publication_nuber();
       } catch (error) {
         this.post_loading = false;
         console.log(error.response);
       }
-    }
-  }
+    },
+    async fetch_publication_nuber() {
+      try {
+        let returned_data;
+        returned_data = await this.$axios.$get(
+          "accounts/" + localStorage.getItem("uid") + "/posts/count"
+        );
+        this.publicatin_nuber = returned_data.count;
+      } catch (error) {
+        console.log("can not get publication number");
+      }
+    },
+  },
 };
 </script>
 

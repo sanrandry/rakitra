@@ -12,7 +12,7 @@
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title class>{{post.account.name}}</v-list-item-title>
-              <v-list-item-subtitle>1 h</v-list-item-subtitle>
+              <v-list-item-subtitle>{{post.updated_at | relativeDate}}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
           <v-img
@@ -27,7 +27,7 @@
               </v-row>
             </template>
           </v-img>
-          <v-card-title>{{post.title}}</v-card-title>
+          <v-card-title class="subtitle-2">{{post.title}}</v-card-title>
 
           <v-card-text class="text--primary">
             <div>{{post.excerpt}}</div>
@@ -54,12 +54,12 @@ export default {
   props: {
     post_id: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   data: () => {
     return {
-      post: null
+      post: null,
     };
   },
   mounted() {
@@ -74,15 +74,15 @@ export default {
         const filter = {
           include: [
             {
-              relation: "account"
+              relation: "account",
             },
             {
-              relation: "images"
+              relation: "images",
             },
             {
-              relation: "categories"
-            }
-          ]
+              relation: "categories",
+            },
+          ],
         };
         this.post = await this.$axios.$get(
           "/posts/" +
@@ -97,8 +97,8 @@ export default {
     },
     read(post_id) {
       this.$router.push({ name: "publications-id", params: { id: post_id } });
-    }
-  }
+    },
+  },
 };
 </script>
 

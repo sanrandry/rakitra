@@ -23,6 +23,12 @@
             <post-card :post_id="item.id"></post-card>
           </v-col>
         </v-row>
+        <!-- <v-row cols="12">
+          <infinite-loading
+            spinner="spiral"
+            @infinite="infinite_loading_handler"
+          ></infinite-loading>
+        </v-row>-->
       </v-col>
       <v-col cols="12" md="3">
         <post-side-nav></post-side-nav>
@@ -35,23 +41,26 @@
 import circularLoading from "@/components/common/circularLoading";
 import postCard from "@/components/post/postCard";
 import postSideNav from "@/components/navigations/postSideNav";
+// infinite loading import doc: https://peachscript.github.io/vue-infinite-loading/
+import InfiniteLoading from "vue-infinite-loading";
 export default {
-  head: function() {
+  head: function () {
     return {
-      title: "publications | rakitra"
+      title: "publications | rakitra",
     };
   },
   data: () => {
     return {
       loading: false,
       key: "",
-      posts: []
+      posts: [],
     };
   },
   components: {
     "post-card": postCard,
     "circular-loading": circularLoading,
-    "post-side-nav": postSideNav
+    "post-side-nav": postSideNav,
+    "infinite-loading": InfiniteLoading,
   },
   created() {
     this.searchDebounce = this.$_.debounce(this.search, 500);
@@ -63,12 +72,12 @@ export default {
     this.fetch_post();
   },
   watch: {
-    $route: function() {
+    $route: function () {
       this.fetch_post();
       if (!this.$route.query.key) {
         this.key = "";
       }
-    }
+    },
   },
   methods: {
     fetch_post() {
@@ -82,14 +91,14 @@ export default {
       try {
         this.loading = true;
         const filter = {
-          fields: { id: true }
+          fields: { id: true },
         };
         if (this.$route.query.key) {
           filter.where = {
             or: [
               { title: { like: this.$route.query.key } },
-              { excerpt: { like: this.$route.query.key } }
-            ]
+              { excerpt: { like: this.$route.query.key } },
+            ],
           };
         }
         this.posts = await this.$axios.$get(
@@ -105,7 +114,7 @@ export default {
       try {
         this.loading = true;
         const filter = {
-          fields: { id: true }
+          fields: { id: true },
         };
         // to be determined later
         // if (this.$route.query.key) {
@@ -131,8 +140,12 @@ export default {
     search() {
       console.log(this.key);
       this.$router.push({ name: "publications", query: { key: this.key } });
-    }
-  }
+    },
+    infinite_loading_handler($state) {
+      // $state.loaded();
+      console.log("pagination");
+    },
+  },
 };
 </script>
 
