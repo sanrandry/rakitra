@@ -10,10 +10,7 @@
         <category-chips></category-chips>
       </v-col>
     </v-row>
-    <v-row>
-      <v-col cols="12">
-        <hr />
-      </v-col>
+    <v-row class="mt-5">
       <v-col cols="12">
         <div class="subtitle-1">Citation du jour</div>
         <div
@@ -21,10 +18,7 @@
         >Sous l'œil de l'ange, un gagnant reste toujours un gagnant . ASA</div>
       </v-col>
     </v-row>
-    <v-row>
-      <v-col cols="12">
-        <hr />
-      </v-col>
+    <v-row class="mt-5">
       <v-col cols="12">
         <div class="subtitle-1">Madagascar en chiffre:</div>
         <div class="font-weight-light mt-2">
@@ -40,10 +34,7 @@
         </div>
       </v-col>
     </v-row>
-    <v-row>
-      <v-col cols="12">
-        <hr />
-      </v-col>
+    <v-row class="mt-5">
       <v-col cols="12">
         <div class="subtitle-1">Madagascar infos:</div>
         <div class="font-weight-light mt-2">
@@ -65,8 +56,8 @@
 import categoryChips from "@/components/common/categoryChips";
 export default {
   components: {
-    "category-chips": categoryChips
-  }
+    "category-chips": categoryChips,
+  },
 };
 </script>
 

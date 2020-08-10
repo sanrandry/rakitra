@@ -46,7 +46,7 @@
           <v-list-item nuxt :to="{name: 'livres'}">
             <v-list-item-title>Taloha</v-list-item-title>
           </v-list-item>
-          <v-list-item @click="comming_soon()">
+          <v-list-item nuxt :to="{name: 'biographie'}">
             <v-list-item-title>Biographie</v-list-item-title>
           </v-list-item>
           <v-list-item @click="comming_soon()">
@@ -106,27 +106,27 @@ export default {
         {
           icon: "mdi-apps",
           title: "Accueil",
-          to: "/"
+          to: "/",
         },
         {
           icon: "mdi-apps",
           title: "Articles",
-          to: "/publications"
+          to: "/publications",
         },
         {
           icon: "mdi-chart-bubble",
           title: "Taloha",
-          to: "/livres"
+          to: "/livres",
         },
         {
           icon: "mdi-chart-bubble",
           title: "Nous soutenir",
-          to: "/donation"
-        }
+          to: "/donation",
+        },
       ],
       miniVariant: false,
       right: true,
-      title: "Rakitra"
+      title: "Rakitra",
     };
   },
   methods: {
@@ -136,10 +136,10 @@ export default {
     },
     comming_soon() {
       this.$store.dispatch("snack/show", {
-        text: "Cette fonctionalité est en cours de développement"
+        text: "Cette fonctionalité est en cours de développement",
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

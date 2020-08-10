@@ -4,17 +4,6 @@
     <v-hover v-if="post">
       <template v-slot:default="{hover}">
         <v-card @click="read(post.id)" flat class="mx-2 my-2">
-          <v-list-item>
-            <v-list-item-avatar>
-              <v-avatar color="deep-purple darken-2" size="32">
-                <span class="white--text subtitle-2">{{post.account.name | first_letter}}</span>
-              </v-avatar>
-            </v-list-item-avatar>
-            <v-list-item-content>
-              <v-list-item-title class>{{post.account.name}}</v-list-item-title>
-              <v-list-item-subtitle>{{post.updated_at | relativeDate}}</v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
           <v-img
             class="white--text align-end"
             height="200px"
@@ -38,6 +27,12 @@
 
             <v-btn color="orange" text>Explore</v-btn>
           </v-card-actions>-->
+          <v-list-item>
+            <v-list-item-content>
+              <v-list-item-subtitle>publié par {{post.account.name}}</v-list-item-subtitle>
+              <v-list-item-subtitle>{{post.updated_at | relativeDate}}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
           <v-fade-transition>
             <v-overlay @click="read(post.id)" v-if="hover" absolute color="white">
               <v-btn color="success">Lire</v-btn>

@@ -1,6 +1,15 @@
+<template></template>
+
+<script>
+export default {};
+</script>
+
+<style>
+</style>
 <template>
   <v-container>
-    <v-row>
+    <!-- search section -->
+    <!-- <v-row>
       <v-col cols="12" md="12">
         <v-text-field
           v-model="key"
@@ -14,10 +23,12 @@
           </template>
         </v-text-field>
       </v-col>
-    </v-row>
+    </v-row>-->
+    <!-- //search section -->
+
     <circular-loading v-if="loading"></circular-loading>
     <v-row>
-      <v-col cols="12" md="9">
+      <v-col cols="12" md="12">
         <v-row>
           <v-col cols="12" md="4" sm="6" v-for="item in posts" :key="item.id">
             <post-card :post_id="item.id"></post-card>
@@ -30,9 +41,11 @@
           ></infinite-loading>
         </v-row>-->
       </v-col>
-      <v-col cols="12" md="3">
+      <!-- right side nav -->
+      <!-- <v-col cols="12" md="3">
         <post-side-nav></post-side-nav>
-      </v-col>
+      </v-col>-->
+      <!-- //right side nav -->
     </v-row>
   </v-container>
 </template>
@@ -69,7 +82,23 @@ export default {
     if (this.$route.query.key) {
       this.key = this.$route.query.key;
     }
-    this.fetch_post();
+    // this.fetch_post();
+    /**
+     * this code need to change in the future
+     */
+    // fetch all the post related to biographie categorie
+    let biographie_category_filter = {
+      where: { name: { like: "biographie", options: "i" } },
+    };
+    this.$axios
+      .$get(
+        "/categories?filter=" +
+          encodeURI(JSON.stringify(biographie_category_filter))
+      )
+      .then((result) => {
+        this.fetch_post_by_category(result[0].id);
+      })
+      .catch((err) => {});
   },
   watch: {
     $route: function () {
@@ -96,9 +125,8 @@ export default {
         if (this.$route.query.key) {
           filter.where = {
             or: [
-              { title: { like: this.$route.query.key, options: "i" } },
-              { excerpt: { like: this.$route.query.key, options: "i" } },
-              { content: { like: this.$route.query.key, options: "i" } },
+              { title: { like: this.$route.query.key } },
+              { excerpt: { like: this.$route.query.key } },
             ],
           };
         }

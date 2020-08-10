@@ -13,57 +13,6 @@
             </v-row>
             <!-- / post title -->
 
-            <!-- post author -->
-            <v-row>
-              <v-col cols="12" class="mx-auto">
-                <v-list three-line>
-                  <v-list-item>
-                    <v-list-item-avatar size="100">
-                      <v-avatar size="100" color="deep-purple darken-2">
-                        <span class="white--text display-1">{{post.account.name | first_letter}}</span>
-                      </v-avatar>
-                    </v-list-item-avatar>
-
-                    <v-list-item-content>
-                      <v-list-item-title>{{post.account.name}}</v-list-item-title>
-                      <v-list-item-subtitle>il y a {{post.updated_at | relativeDate}}</v-list-item-subtitle>
-                    </v-list-item-content>
-
-                    <v-list-item-action>
-                      <div>
-                        <!-- the future share will be there -->
-                        <!-- <v-btn color="success" large depressed to="/profil/editor" nuxt>
-                    <v-icon left>mdi-pencil</v-icon>nouvelle publication
-                        </v-btn>-->
-                        <v-btn
-                          color="success"
-                          v-if="$auth.loggedIn && post.accountId == $auth.user.id"
-                          text
-                          depressed
-                          small
-                          :to="'/profil/editor?id=' + post.id"
-                          nuxt
-                        >
-                          <v-icon left>mdi-pencil</v-icon>modifier
-                        </v-btn>
-                        <v-btn
-                          v-if="$auth.loggedIn && post.accountId == $auth.user.id"
-                          color="warning"
-                          small
-                          text
-                          depressed
-                          @click="delete_post($route.params.id)"
-                          nuxt
-                        >
-                          <v-icon left>mdi-trash</v-icon>supprimer
-                        </v-btn>
-                      </div>
-                    </v-list-item-action>
-                  </v-list-item>
-                </v-list>
-              </v-col>
-            </v-row>
-            <!-- / post author -->
             <!-- post excerpt -->
             <div>
               <p>{{post.excerpt}}</p>
@@ -85,6 +34,17 @@
               </v-col>
             </v-row>
             <!-- / post content -->
+
+            <!-- post author -->
+            <v-row justify="end">
+              <div class="d-inline caption">
+                publié par
+                <span>{{post.account.name}}</span>
+                <br />
+                <span>{{post.updated_at | relativeDate}}</span>
+              </div>
+            </v-row>
+            <!-- / post author -->
           </v-col>
         </v-row>
       </v-container>
