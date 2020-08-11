@@ -4,8 +4,7 @@
 export default {};
 </script>
 
-<style>
-</style>
+<style></style>
 <template>
   <v-container>
     <!-- search section -->
@@ -57,23 +56,28 @@ import postSideNav from "@/components/navigations/postSideNav";
 // infinite loading import doc: https://peachscript.github.io/vue-infinite-loading/
 import InfiniteLoading from "vue-infinite-loading";
 export default {
-  head: function () {
+  head: function() {
     return {
-      title: "publications | rakitra",
+      title: "publications | rakitra"
+    };
+  },
+  head: function() {
+    return {
+      title: "publications | rakitra"
     };
   },
   data: () => {
     return {
       loading: false,
       key: "",
-      posts: [],
+      posts: []
     };
   },
   components: {
     "post-card": postCard,
     "circular-loading": circularLoading,
     "post-side-nav": postSideNav,
-    "infinite-loading": InfiniteLoading,
+    "infinite-loading": InfiniteLoading
   },
   created() {
     this.searchDebounce = this.$_.debounce(this.search, 500);
@@ -88,25 +92,25 @@ export default {
      */
     // fetch all the post related to biographie categorie
     let biographie_category_filter = {
-      where: { name: { like: "biographie", options: "i" } },
+      where: { name: { like: "biographie", options: "i" } }
     };
     this.$axios
       .$get(
         "/categories?filter=" +
           encodeURI(JSON.stringify(biographie_category_filter))
       )
-      .then((result) => {
+      .then(result => {
         this.fetch_post_by_category(result[0].id);
       })
-      .catch((err) => {});
+      .catch(err => {});
   },
   watch: {
-    $route: function () {
+    $route: function() {
       this.fetch_post();
       if (!this.$route.query.key) {
         this.key = "";
       }
-    },
+    }
   },
   methods: {
     fetch_post() {
@@ -120,14 +124,14 @@ export default {
       try {
         this.loading = true;
         const filter = {
-          fields: { id: true },
+          fields: { id: true }
         };
         if (this.$route.query.key) {
           filter.where = {
             or: [
               { title: { like: this.$route.query.key } },
-              { excerpt: { like: this.$route.query.key } },
-            ],
+              { excerpt: { like: this.$route.query.key } }
+            ]
           };
         }
         this.posts = await this.$axios.$get(
@@ -143,7 +147,7 @@ export default {
       try {
         this.loading = true;
         const filter = {
-          fields: { id: true },
+          fields: { id: true }
         };
         // to be determined later
         // if (this.$route.query.key) {
@@ -173,8 +177,8 @@ export default {
     infinite_loading_handler($state) {
       // $state.loaded();
       console.log("pagination");
-    },
-  },
+    }
+  }
 };
 </script>
 

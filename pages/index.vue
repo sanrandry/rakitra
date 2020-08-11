@@ -24,6 +24,11 @@ import team from "@/components/homepage/team";
 import client from "@/components/homepage/client";
 
 export default {
+  head: function() {
+    return {
+      title: "accueil | rakitra"
+    };
+  },
   components: {
     banner,
     description,

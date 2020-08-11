@@ -3,8 +3,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  head: function() {
+    return {
+      title: "livres | rakitra"
+    };
+  }
+};
 </script>
 
-<style>
-</style>
+<style></style>

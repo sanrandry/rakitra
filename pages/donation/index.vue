@@ -12,24 +12,29 @@
 import InfiniteLoading from "vue-infinite-loading";
 import donationCard from "@/components/common/donationCard";
 export default {
-  data: function () {
+  head: function() {
     return {
-      list: [2, 3, 4],
+      title: "donation | rakitra"
+    };
+  },
+  data: function() {
+    return {
+      list: [2, 3, 4]
     };
   },
   components: {
     "donation-card": donationCard,
-    "infinite-loading": InfiniteLoading,
+    "infinite-loading": InfiniteLoading
   },
   methods: {
     infinite_loading_hanlder($state) {
       console.log("loading");
       this.item.push(5);
-      setTimeout(function () {
+      setTimeout(function() {
         $state.complete();
       }, 50000);
-    },
-  },
+    }
+  }
 };
 </script>
 

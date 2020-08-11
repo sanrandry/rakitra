@@ -3,7 +3,11 @@
     <v-container>
       <v-row>
         <v-col v-for="item in books" :key="item.title" cols="12" md="6">
-          <book-card :title="item.title" :image="item.image" :file="item.file"></book-card>
+          <book-card
+            :title="item.title"
+            :image="item.image"
+            :file="item.file"
+          ></book-card>
         </v-col>
       </v-row>
     </v-container>
@@ -13,6 +17,11 @@
 <script>
 import bookCard from "@/components/common/bookCard";
 export default {
+  head: function() {
+    return {
+      title: "livres | rakitra"
+    };
+  },
   data() {
     return {
       books: [
@@ -80,5 +89,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

@@ -5,17 +5,49 @@
       <v-container>
         <v-row>
           <v-col cols="12" md="9" class="mx-auto">
+            <!-- post author -->
+            <v-row justify="end">
+              <div class="d-inline">
+                <!-- the future share will be there -->
+                <!-- <v-btn color="success" large depressed to="/profil/editor" nuxt>
+                    <v-icon left>mdi-pencil</v-icon>nouvelle publication
+                        </v-btn>-->
+                <v-btn
+                  color="success"
+                  v-if="$auth.loggedIn && post.accountId == $auth.user.id"
+                  text
+                  depressed
+                  small
+                  :to="'/profil/editor?id=' + post.id"
+                  nuxt
+                >
+                  <v-icon left>mdi-pencil</v-icon>modifier
+                </v-btn>
+                <v-btn
+                  v-if="$auth.loggedIn && post.accountId == $auth.user.id"
+                  color="warning"
+                  small
+                  text
+                  depressed
+                  @click="delete_post($route.params.id)"
+                  nuxt
+                >
+                  <v-icon left>mdi-trash</v-icon>supprimer
+                </v-btn>
+              </div>
+            </v-row>
+            <!-- / post author -->
             <!-- post title -->
             <v-row>
               <v-col cols="12">
-                <div class="title">{{post.title}}</div>
+                <div class="title">{{ post.title }}</div>
               </v-col>
             </v-row>
             <!-- / post title -->
 
             <!-- post excerpt -->
             <div>
-              <p>{{post.excerpt}}</p>
+              <p>{{ post.excerpt }}</p>
             </div>
             <!-- / post excerpt -->
 
@@ -39,9 +71,9 @@
             <v-row justify="end">
               <div class="d-inline caption">
                 publié par
-                <span>{{post.account.name}}</span>
+                <span>{{ post.account.name }}</span>
                 <br />
-                <span>{{post.updated_at | relativeDate}}</span>
+                <span>{{ post.updated_at | relativeDate }}</span>
               </div>
             </v-row>
             <!-- / post author -->
@@ -55,13 +87,18 @@
 <script>
 import circularLoading from "@/components/common/circularLoading";
 export default {
+  head: function() {
+    return {
+      title: "publications | rakitra"
+    };
+  },
   data: () => {
     return {
-      post: "",
+      post: ""
     };
   },
   components: {
-    "circular-loading": circularLoading,
+    "circular-loading": circularLoading
   },
   mounted() {
     this.fetch_post();
@@ -72,12 +109,12 @@ export default {
         const filter = {
           include: [
             {
-              relation: "account",
+              relation: "account"
             },
             {
-              relation: "images",
-            },
-          ],
+              relation: "images"
+            }
+          ]
         };
         this.post = await this.$axios.$get(
           "/posts/" +
@@ -108,7 +145,7 @@ export default {
           "/posts/" + post_id + "/categories"
         );
         if (post_categories && post_categories.length > 0) {
-          post_categories.forEach(async (element) => {
+          post_categories.forEach(async element => {
             await this.$axios.$delete(
               "/posts/" + post_id + "/categories/rel/" + element.id
             );
@@ -120,10 +157,9 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style>
-</style>
+<style></style>
