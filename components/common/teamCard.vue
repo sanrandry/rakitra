@@ -16,7 +16,7 @@
       </v-card-text>
       <v-card-title primary-title class="justify-center pt-0">
         <div class="text-center">
-          <p class="title font-weight-light text-capitalize">{{ item.name }}</p>
+          <p class="body-2 font-weight-light text-capitalize">{{ item.name }}</p>
           <em class="font-weight-light font-italic caption">{{ item.status }}</em>
         </div>
       </v-card-title>
@@ -29,8 +29,8 @@ import vImgLazyLoading from "@/components/common/vImgLazyLoading";
 export default {
   props: {
     item: {
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
@@ -42,8 +42,8 @@ export default {
     };
   },
   components: {
-    "v-img-lazy-loading": vImgLazyLoading
-  }
+    "v-img-lazy-loading": vImgLazyLoading,
+  },
 };
 </script>
 

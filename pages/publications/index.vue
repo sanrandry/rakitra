@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <v-row>
       <v-col cols="12" md="12">
         <v-text-field
@@ -44,23 +44,23 @@ import postSideNav from "@/components/navigations/postSideNav";
 // infinite loading import doc: https://peachscript.github.io/vue-infinite-loading/
 import InfiniteLoading from "vue-infinite-loading";
 export default {
-  head: function () {
+  head: function() {
     return {
-      title: "publications | rakitra",
+      title: "publications | rakitra"
     };
   },
   data: () => {
     return {
       loading: false,
       key: "",
-      posts: [],
+      posts: []
     };
   },
   components: {
     "post-card": postCard,
     "circular-loading": circularLoading,
     "post-side-nav": postSideNav,
-    "infinite-loading": InfiniteLoading,
+    "infinite-loading": InfiniteLoading
   },
   created() {
     this.searchDebounce = this.$_.debounce(this.search, 500);
@@ -72,12 +72,12 @@ export default {
     this.fetch_post();
   },
   watch: {
-    $route: function () {
+    $route: function() {
       this.fetch_post();
       if (!this.$route.query.key) {
         this.key = "";
       }
-    },
+    }
   },
   methods: {
     fetch_post() {
@@ -91,15 +91,15 @@ export default {
       try {
         this.loading = true;
         const filter = {
-          fields: { id: true },
+          fields: { id: true }
         };
         if (this.$route.query.key) {
           filter.where = {
             or: [
               { title: { like: this.$route.query.key, options: "i" } },
               { excerpt: { like: this.$route.query.key, options: "i" } },
-              { content: { like: this.$route.query.key, options: "i" } },
-            ],
+              { content: { like: this.$route.query.key, options: "i" } }
+            ]
           };
         }
         this.posts = await this.$axios.$get(
@@ -115,7 +115,7 @@ export default {
       try {
         this.loading = true;
         const filter = {
-          fields: { id: true },
+          fields: { id: true }
         };
         // to be determined later
         // if (this.$route.query.key) {
@@ -145,8 +145,8 @@ export default {
     infinite_loading_handler($state) {
       // $state.loaded();
       console.log("pagination");
-    },
-  },
+    }
+  }
 };
 </script>
 

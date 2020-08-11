@@ -25,6 +25,7 @@
     "vue-underscore": "^0.1.4"
   },
   "devDependencies": {
+    "@nuxtjs/google-analytics": "^2.4.0",
     "@nuxtjs/vuetify": "^1.0.0"
   }
 }

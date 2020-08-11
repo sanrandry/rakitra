@@ -15,6 +15,26 @@ export default {
         hid: "description",
         name: "description",
         content: process.env.npm_package_description || ""
+      },
+      {
+        property: "og:url",
+        content: "http://rakitra.mg"
+      },
+      {
+        property: "og:type",
+        content: "website"
+      },
+      {
+        property: "og:title",
+        content: process.env.name || ""
+      },
+      {
+        property: "og:description",
+        content: process.env.npm_package_description || ""
+      },
+      {
+        property: "og:image",
+        content: "/icon.png"
       }
     ],
     link: [
@@ -81,7 +101,15 @@ export default {
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: ["@nuxtjs/vuetify"],
+  buildModules: [
+    "@nuxtjs/vuetify",
+    [
+      "@nuxtjs/google-analytics",
+      {
+        id: "UA-132403510-1"
+      }
+    ]
+  ],
   /*
    ** Nuxt.js modules
    */
