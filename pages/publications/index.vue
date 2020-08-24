@@ -1,23 +1,13 @@
 <template>
   <v-container fluid>
-    <v-row>
-      <v-col cols="12" md="12">
-        <v-text-field
-          v-model="key"
-          class="headline"
-          height="50"
-          @keyup="searchDebounce()"
-          color="rgba(0,0,0,.84)"
-        >
-          <template v-slot:label>
-            <label class>Recherche</label>
-          </template>
-        </v-text-field>
-      </v-col>
-    </v-row>
-    <circular-loading v-if="loading"></circular-loading>
-    <v-row>
+    <v-row class="mt-3">
       <v-col cols="12" md="9">
+        <v-row>
+          <v-col cols="12" class="px-5">
+            <search-form v-model="key" @keyup="searchDebounce()"></search-form>
+          </v-col>
+        </v-row>
+        <circular-loading v-if="loading"></circular-loading>
         <v-row>
           <v-col cols="12" md="4" sm="6" v-for="item in posts" :key="item.id">
             <post-card :post_id="item.id"></post-card>
@@ -39,28 +29,30 @@
 
 <script>
 import circularLoading from "@/components/common/circularLoading";
+import searchForm from "@/components/common/searchForm";
 import postCard from "@/components/post/postCard";
 import postSideNav from "@/components/navigations/postSideNav";
 // infinite loading import doc: https://peachscript.github.io/vue-infinite-loading/
 import InfiniteLoading from "vue-infinite-loading";
 export default {
-  head: function() {
+  head: function () {
     return {
-      title: "publications | rakitra"
+      title: "publications | rakitra",
     };
   },
   data: () => {
     return {
       loading: false,
       key: "",
-      posts: []
+      posts: [],
     };
   },
   components: {
     "post-card": postCard,
     "circular-loading": circularLoading,
     "post-side-nav": postSideNav,
-    "infinite-loading": InfiniteLoading
+    "infinite-loading": InfiniteLoading,
+    "search-form": searchForm,
   },
   created() {
     this.searchDebounce = this.$_.debounce(this.search, 500);
@@ -72,12 +64,12 @@ export default {
     this.fetch_post();
   },
   watch: {
-    $route: function() {
+    $route: function () {
       this.fetch_post();
       if (!this.$route.query.key) {
         this.key = "";
       }
-    }
+    },
   },
   methods: {
     fetch_post() {
@@ -91,15 +83,15 @@ export default {
       try {
         this.loading = true;
         const filter = {
-          fields: { id: true }
+          fields: { id: true },
         };
         if (this.$route.query.key) {
           filter.where = {
             or: [
               { title: { like: this.$route.query.key, options: "i" } },
               { excerpt: { like: this.$route.query.key, options: "i" } },
-              { content: { like: this.$route.query.key, options: "i" } }
-            ]
+              { content: { like: this.$route.query.key, options: "i" } },
+            ],
           };
         }
         this.posts = await this.$axios.$get(
@@ -115,7 +107,7 @@ export default {
       try {
         this.loading = true;
         const filter = {
-          fields: { id: true }
+          fields: { id: true },
         };
         // to be determined later
         // if (this.$route.query.key) {
@@ -145,8 +137,8 @@ export default {
     infinite_loading_handler($state) {
       // $state.loaded();
       console.log("pagination");
-    }
-  }
+    },
+  },
 };
 </script>
 

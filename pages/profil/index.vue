@@ -15,7 +15,7 @@
               <v-list-item-subtitle>{{publicatin_nuber}} publication(s)</v-list-item-subtitle>
             </v-list-item-content>
 
-            <v-list-item-action>
+            <v-list-item-action v-if="$userPerimeter.isAllowed('read')">
               <v-btn color="success" large depressed to="/profil/editor" nuxt>
                 <v-icon left>mdi-pencil</v-icon>nouvelle publication
               </v-btn>
@@ -36,7 +36,9 @@
 <script>
 import circularLoading from "@/components/common/circularLoading";
 import postCard from "@/components/post/postCard";
+import userPerimeter from "@/perimeters/userPerimeter";
 export default {
+  perimeters: [userPerimeter],
   data() {
     return {
       post_loading: false,

@@ -96,7 +96,8 @@ export default {
     { src: "plugins/owl.js", mode: "client" },
     { src: "plugins/underscore.js", mode: "client" },
     { src: "plugins/profileAvatar.js" },
-    { src: "plugins/timeFilter.js" }
+    { src: "plugins/timeFilter.js" },
+    { src: "plugins/vue-kindergarten.js" }
   ],
   /*
    ** Nuxt.js dev-modules
