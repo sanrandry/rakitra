@@ -11,7 +11,7 @@
                 <!-- the future share will be there -->
                 <!-- <v-btn color="success" large depressed to="/profil/editor" nuxt>
                     <v-icon left>mdi-pencil</v-icon>nouvelle publication
-                        </v-btn>-->
+                </v-btn>-->
                 <v-btn
                   color="success"
                   v-if="$auth.loggedIn && post.accountId == $auth.user.id"
@@ -87,18 +87,19 @@
 <script>
 import circularLoading from "@/components/common/circularLoading";
 export default {
-  head: function() {
+  head: function () {
     return {
-      title: "publications | rakitra"
+      title: "publications | rakitra",
     };
   },
   data: () => {
     return {
-      post: ""
+      loading: false,
+      post: "",
     };
   },
   components: {
-    "circular-loading": circularLoading
+    "circular-loading": circularLoading,
   },
   mounted() {
     this.fetch_post();
@@ -106,15 +107,16 @@ export default {
   methods: {
     async fetch_post() {
       try {
+        this.loading = true;
         const filter = {
           include: [
             {
-              relation: "account"
+              relation: "account",
             },
             {
-              relation: "images"
-            }
-          ]
+              relation: "images",
+            },
+          ],
         };
         this.post = await this.$axios.$get(
           "/posts/" +
@@ -122,8 +124,10 @@ export default {
             "?filter=" +
             encodeURI(JSON.stringify(filter))
         );
+        this.loading = false;
         console.log(this.post);
       } catch (error) {
+        this.loading = false;
         console.log(error);
       }
     },
@@ -145,7 +149,7 @@ export default {
           "/posts/" + post_id + "/categories"
         );
         if (post_categories && post_categories.length > 0) {
-          post_categories.forEach(async element => {
+          post_categories.forEach(async (element) => {
             await this.$axios.$delete(
               "/posts/" + post_id + "/categories/rel/" + element.id
             );
@@ -157,8 +161,8 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

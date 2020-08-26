@@ -128,8 +128,8 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    // baseURL: "http://localhost:3001/api"
-    baseURL: "https://rakitrabackend.herokuapp.com/api"
+    baseURL: "http://localhost:3001/api"
+    // baseURL: "http://51.178.83.37:3001/api"
   },
 
   /**

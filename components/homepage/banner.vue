@@ -28,7 +28,7 @@
                 solo
                 label="Rechercher des articles, mots clef, pulibcations, etc..."
               ></v-text-field>-->
-              <search-form @click:append="search()" @keydown.enter="search()"></search-form>
+              <search-form v-model="key" @click:append="search()" @keydown.enter="search()"></search-form>
             </v-col>
           </v-row>
         </v-col>
@@ -65,7 +65,7 @@ export default {
     background-color: rgba(0, 0, 0, 1) !important;
     // background-color: red !important;
   }
-  background: url("~assets/images/homepage/COUVERTURE RAKITRA.png")
+  background: url("~assets/images/homepage/COUVERTURE RAKITRA1.jpg")
     rgba(0, 0, 0, 0.2);
   background-size: cover;
   background-blend-mode: multiply;
