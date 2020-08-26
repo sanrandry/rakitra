@@ -62,7 +62,7 @@
             <!-- post content -->
             <v-row>
               <v-col cols="12">
-                <div v-html="post.content"></div>
+                <div v-html="post.content" id="post_content"></div>
               </v-col>
             </v-row>
             <!-- / post content -->
@@ -166,4 +166,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss">
+#post_content {
+  img {
+    max-width: 100%;
+  }
+}
+</style>

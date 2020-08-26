@@ -1,11 +1,11 @@
 <template>
   <v-app>
-    <appbar />
+    <!-- <appbar /> -->
     <v-content>
       <nuxt />
     </v-content>
-    <v-divider></v-divider>
-    <appfooter />
+    <!-- <v-divider></v-divider> -->
+    <!-- <appfooter /> -->
 
     <snackbar />
   </v-app>

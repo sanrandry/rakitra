@@ -1,15 +1,14 @@
 <template>
-  <v-container>
-    <post-form />
-  </v-container>
+  <post-form />
 </template>
 
 <script>
 import postForm from "@/components/post/postForm";
 export default {
+  layout: "editorLayout",
   components: {
-    "post-form": postForm
-  }
+    "post-form": postForm,
+  },
 };
 </script>
 
