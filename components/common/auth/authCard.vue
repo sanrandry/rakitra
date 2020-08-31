@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card outlined>
     <v-card-text
       class="text-weight-thin text-center"
       v-if="tab == 'login'"
@@ -26,13 +26,13 @@ import signupForm from "./signupForm";
 export default {
   data: () => {
     return {
-      tab: null
+      tab: null,
     };
   },
   components: {
     "login-form": loginForm,
-    "signup-form": signupForm
-  }
+    "signup-form": signupForm,
+  },
 };
 </script>
 

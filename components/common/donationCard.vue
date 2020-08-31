@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto">
+  <v-card class="mx-auto" outlined>
     <v-img class="white--text align-end" contain :src="image_url"></v-img>
 
     <v-card-text class="text--primary">
@@ -18,15 +18,15 @@ export default {
     return {
       images: [
         require("@/assets/images/store/tee-shirt.jpg"),
-        require("@/assets/images/store/tee-shirt2.jpg")
-      ]
+        require("@/assets/images/store/tee-shirt2.jpg"),
+      ],
     };
   },
   computed: {
     image_url() {
       return this.images[1];
-    }
-  }
+    },
+  },
 };
 </script>
 
