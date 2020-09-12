@@ -42,7 +42,7 @@
             <li>Fête nationale 26 juin: indépendence(1960)</li>
             <li>Hymne: Ry Tanindrazanay malala ô</li>
             <li>Devise: Fitiavana, Tanindrazana, Fandrosoana</li>
-            <li>Capitale: Antanarivo</li>
+            <li>Capitale: Antananarivo</li>
             <li>Langue officielles: Malgache et Francais</li>
             <li>Monnaie: Ariary</li>
           </ul>

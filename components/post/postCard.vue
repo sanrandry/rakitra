@@ -1,6 +1,6 @@
 <template>
   <v-lazy transition="fade-transition">
-    <div v-if="!post">loading...</div>
+    <v-skeleton-loader v-if="!post" class="mx-auto" max-width="300" type="card"></v-skeleton-loader>
     <v-hover v-if="post">
       <template v-slot:default="{ hover }">
         <v-card @click="read(post.id)" flat class="mx-2 my-2">
@@ -16,10 +16,7 @@
           >
             <template v-slot:placeholder>
               <v-row class="fill-height ma-0" align="center" justify="center">
-                <v-progress-circular
-                  indeterminate
-                  color="red lighten-5"
-                ></v-progress-circular>
+                <v-progress-circular indeterminate color="red lighten-5"></v-progress-circular>
               </v-row>
             </template>
           </v-img>
@@ -39,14 +36,9 @@
               <v-list-item-subtitle>publié par {{post.account.name}}</v-list-item-subtitle>
               <v-list-item-subtitle>{{post.updated_at | relativeDate}}</v-list-item-subtitle>
             </v-list-item-content>
-          </v-list-item> -->
+          </v-list-item>-->
           <v-fade-transition>
-            <v-overlay
-              @click="read(post.id)"
-              v-if="hover"
-              absolute
-              color="white"
-            >
+            <v-overlay @click="read(post.id)" v-if="hover" absolute color="white">
               <v-btn color="success">Lire</v-btn>
             </v-overlay>
           </v-fade-transition>
@@ -61,12 +53,12 @@ export default {
   props: {
     post_id: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   data: () => {
     return {
-      post: null
+      post: null,
     };
   },
   mounted() {
@@ -81,15 +73,15 @@ export default {
         const filter = {
           include: [
             {
-              relation: "account"
+              relation: "account",
             },
             {
-              relation: "images"
+              relation: "images",
             },
             {
-              relation: "categories"
-            }
-          ]
+              relation: "categories",
+            },
+          ],
         };
         this.post = await this.$axios.$get(
           "/posts/" +
@@ -104,8 +96,8 @@ export default {
     },
     read(post_id) {
       this.$router.push({ name: "publications-id", params: { id: post_id } });
-    }
-  }
+    },
+  },
 };
 </script>
 

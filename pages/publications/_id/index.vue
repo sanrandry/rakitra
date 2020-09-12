@@ -1,6 +1,11 @@
 <template>
   <v-lazy group transition="fade-transition">
-    <circular-loading v-if="!post"></circular-loading>
+    <div v-if="!post">
+      <circular-loading></circular-loading>
+      <v-col cols="12" md="9" class="mx-auto">
+        <v-skeleton-loader type="heading, sentences, image, paragraph, paragraph" class="mx-auto"></v-skeleton-loader>
+      </v-col>
+    </div>
     <div v-if="post">
       <v-container>
         <v-row>
@@ -54,7 +59,7 @@
             <!-- post images -->
             <v-row v-if="post.images">
               <v-col cols="12">
-                <v-img :src="post.images.data"></v-img>
+                <v-img :src="post.images.data" contain></v-img>
               </v-col>
             </v-row>
             <!-- / post images -->

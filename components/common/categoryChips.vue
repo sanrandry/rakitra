@@ -24,10 +24,10 @@
 
 <script>
 export default {
-  data: function() {
+  data: function () {
     return {
       loading: false,
-      categories: []
+      categories: [],
     };
   },
   mounted() {
@@ -39,6 +39,7 @@ export default {
         this.loading = true;
         this.categories = await this.$axios.$get("/categories");
         this.loading = false;
+        console.log("categorie", this.categories);
       } catch (error) {
         this.loading = false;
         console.log(error);
@@ -46,8 +47,8 @@ export default {
     },
     go(category_id) {
       this.$router.push({ name: "publications", query: { cat: category_id } });
-    }
-  }
+    },
+  },
 };
 </script>
 
