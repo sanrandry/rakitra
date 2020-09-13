@@ -35,8 +35,7 @@ export default {
         let data = await this.$axios.$get(
           "/categories/" + this.$route.query.cat + "/posts/count"
         );
-        console.log("lenght: ", data);
-        this.length = data.count / this.item_per_page;
+        this.length = Math.ceil(data.count / this.item_per_page);
         return;
       }
       // verif if we made a search
@@ -53,8 +52,7 @@ export default {
       let data = await this.$axios.$get(
         "/posts/count?where=" + encodeURI(JSON.stringify(filter))
       );
-      console.log("lenght: ", data);
-      this.length = data.count / this.item_per_page;
+      this.length = Math.ceil(data.count / this.item_per_page);
     },
   },
 };
