@@ -1,15 +1,27 @@
 <template>
   <v-lazy transition="fade-transition">
     <div>
-      <v-row>
+      <v-row class="mb-2">
         <v-col>
-          <div class="headline font-weight-light text-center">Nos partenaires</div>
+          <div class="headline font-weight-light text-center">
+            Nos partenaires
+          </div>
         </v-col>
       </v-row>
       <v-row>
         <v-col>
-          <carousel :nav="false" :items="6" :loop="true" :autoplay="true" :dots="false">
-            <client-logo v-for="item in clients" :key="item.logo" :src="item.logo" />
+          <carousel
+            :nav="false"
+            :items="6"
+            :loop="true"
+            :autoplay="true"
+            :dots="false"
+          >
+            <client-logo
+              v-for="item in clients"
+              :key="item.logo"
+              :src="item.logo"
+            />
           </carousel>
         </v-col>
       </v-row>
@@ -50,5 +62,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

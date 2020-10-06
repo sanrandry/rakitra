@@ -26,52 +26,74 @@
             <v-col md="4">
               <div>Menu</div>
               <div>
-                <nuxt-link to="/" class="footer_link black--text body-2">Accueil</nuxt-link>
-              </div>
-              <div>
-                <nuxt-link to="/publications" class="footer_link black--text body-2">Articles</nuxt-link>
-              </div>
-              <div>
-                <nuxt-link to="/donation" class="footer_link black--text body-2">Nous soutenir</nuxt-link>
+                <nuxt-link to="/" class="footer_link black--text body-2"
+                  >Accueil</nuxt-link
+                >
               </div>
               <div>
                 <nuxt-link
-                  :to="{name: 'about'}"
+                  to="/publications"
                   class="footer_link black--text body-2"
-                >À propos de Rakitra</nuxt-link>
+                  >Articles</nuxt-link
+                >
+              </div>
+              <div>
+                <nuxt-link to="/donation" class="footer_link black--text body-2"
+                  >Nous soutenir</nuxt-link
+                >
+              </div>
+              <div>
+                <nuxt-link
+                  :to="{ name: 'about' }"
+                  class="footer_link black--text body-2"
+                  >À propos de Rakitra</nuxt-link
+                >
               </div>
             </v-col>
             <v-col md="4">
               <div>Nos coordonnées</div>
               <div>
-                <v-icon size="19" class="mr-1">mdi-home</v-icon>Antananarivo-Madagascar
+                <v-icon size="19" class="mr-1">mdi-home</v-icon
+                >Antananarivo-Madagascar
               </div>
               <div>
-                <v-icon size="19" class="mr-1">mdi-email</v-icon>rakitra@rakitra.mg
+                <v-icon size="19" class="mr-1">mdi-email</v-icon
+                >rakitra@rakitra.mg
               </div>
               <div>
-                <v-icon size="19" class="mr-1">mdi-phone-in-talk</v-icon>+261 34 81 842 01
+                <v-icon size="19" class="mr-1">mdi-phone-in-talk</v-icon>+261 34
+                81 842 01
               </div>
             </v-col>
             <v-col md="4">
               <div>Espace Rakitra</div>
               <div>
                 <nuxt-link
-                  :to="{name: 'faq'}"
+                  :to="{ name: 'faq' }"
                   class="footer_link black--text body-2"
-                >Foire aux questions</nuxt-link>
-              </div>
-              <div>
-                <nuxt-link to="#" class="footer_link black--text body-2">Communautés développeurs</nuxt-link>
-              </div>
-              <div>
-                <nuxt-link to="#" class="footer_link black--text body-2">Condition d'utilisation</nuxt-link>
+                  >Foire aux questions</nuxt-link
+                >
               </div>
               <div>
                 <nuxt-link
-                  to="#"
+                  to="community.php"
                   class="footer_link black--text body-2"
-                >Politique de confidentialité</nuxt-link>
+                  >Communautés développeurs</nuxt-link
+                >
+              </div>
+              <div>
+                <nuxt-link
+                  to="term-of-use.php"
+                  class="footer_link black--text body-2"
+                  >Condition d'utilisation</nuxt-link
+                >
+              </div>
+              <div>
+                <nuxt-link
+                  to="privacy-policy.php"
+                  class="footer_link black--text body-2"
+                  >Politique de confidentialité</nuxt-link
+                >
               </div>
             </v-col>
           </v-row>
@@ -86,9 +108,9 @@
 
 <script>
 export default {
-  data: function () {
+  data: function() {
     return {};
-  },
+  }
 };
 </script>
 

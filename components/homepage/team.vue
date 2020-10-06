@@ -1,9 +1,11 @@
 <template>
   <v-lazy transition="fade-transition">
     <div>
-      <v-row>
+      <v-row class="mb-2">
         <v-col cols="12">
-          <div class="headline font-weight-light text-center">L'équipe de Rakitra</div>
+          <div class="headline font-weight-light text-center">
+            L'équipe de Rakitra
+          </div>
         </v-col>
       </v-row>
 
@@ -16,7 +18,11 @@
             :autoplay="true"
             :dots="false"
           >
-            <team-card v-for="item in team" :key="item.name" :item="item"></team-card>
+            <team-card
+              v-for="item in team"
+              :key="item.name"
+              :item="item"
+            ></team-card>
           </carousel>
         </v-col>
       </v-row>
@@ -33,50 +39,50 @@ export default {
         {
           image: require("@/assets/images/team/f9c6776.jpg"),
           name: "Rangers Tsihaligno",
-          status: "specialiste en histoire",
+          status: "specialiste en histoire"
         },
         {
           image: require("@/assets/images/team/3a5c574.jpg"),
           name: "Fanja Rakotonorina",
-          status: "Enseignante",
+          status: "Enseignante"
         },
         {
           image: require("@/assets/images/team/hjkjfsfsdkjkdfs.jpg"),
           name: "IHARIMALALA Louisette Nina",
-          status: "Enseignante à l'Université d'Antananarivo",
+          status: "Enseignante à l'Université d'Antananarivo"
           // ", Fondatrice du Lycée Privé le Capricorne Ambatoantrano Tsiroanomadidy"
         },
         {
           image: require("@/assets/images/team/a1c2d94.jpg"),
           name: "Santatriniaina Alain Ambinintsoa",
-          status: "Informaticien et Entrepreneur",
+          status: "Informaticien et Entrepreneur"
         },
         {
           image: require("@/assets/images/team/434852f.jpg"),
           name: "Fernand Nathan MAHAIAVY",
-          status: "Journaliste",
+          status: "Journaliste"
         },
         {
           image: require("@/assets/images/team/b2c47d5.jpg"),
           name: "HANITRARIMALA Arson Dinah",
-          status: "Ecrivain",
+          status: "Ecrivain"
         },
         {
           image: require("@/assets/images/team/9b33300.png"),
           name: "Brillant Jean Félicien",
-          status: "Infographiste",
+          status: "Infographiste"
         },
         {
           image: require("@/assets/images/team/a97d703.jpg"),
           name: "san randry",
-          status: "Informaticien",
-        },
-      ],
+          status: "Informaticien"
+        }
+      ]
     };
   },
   components: {
-    "team-card": teamCard,
-  },
+    "team-card": teamCard
+  }
 };
 </script>
 
