@@ -121,7 +121,9 @@ export default {
     // Doc: https://github.com/nuxt-community/dotenv-module
     "@nuxtjs/dotenv",
     // Doc: https://auth.nuxtjs.org/
-    "@nuxtjs/auth"
+    "@nuxtjs/auth",
+    ,
+    "@nuxtjs/sitemap"
   ],
   /*
    ** Axios module configuration
@@ -157,6 +159,14 @@ export default {
     },
     // plugin extension
     plugins: [{ src: "~/plugins/auth.js", mode: "client" }]
+  },
+  /**
+   * sitemap config
+   * https://github.com/nuxt-community/sitemap-module
+   */
+  sitemap: {
+    // options
+    hostname: "https://rakitra.mg"
   },
   /*
    ** vuetify module configuration
